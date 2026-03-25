@@ -38,15 +38,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   position:absolute;top:50%;left:50%;
   width:120vw;height:120vh; /* Oversize to cover + crop YouTube chrome */
   transform:translate(-50%,-50%);
-  filter:grayscale(100%) contrast(0.9) brightness(1.05);opacity:0.2;
+  filter:grayscale(30%) contrast(1.1) brightness(0.7);opacity:0.6;
   border:none;
 }
 /* Poster fallback — visible until iframe loads */
-.hero-poster{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80') center/cover no-repeat;filter:grayscale(100%) contrast(0.9) brightness(1.05);opacity:0.18;transition:opacity 0.5s;}
+.hero-poster{position:absolute;inset:0;background:url('images/hero-poster.jpg') center/cover no-repeat;filter:grayscale(30%) contrast(1.1) brightness(0.7);opacity:0.55;transition:opacity 0.5s;}
 .hero-poster.hidden{opacity:0;}
 
 /* Paint stroke peg — the signature element */
 .hero-peg{position:absolute;top:12%;right:10%;height:58vh;width:auto;z-index:1;opacity:0.6;}
+
+/* Cream gradient over video for text readability */
+.hero-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(243,237,229,0.92) 0%,rgba(243,237,229,0.7) 40%,rgba(243,237,229,0.25) 65%,rgba(243,237,229,0.05) 100%);}
 
 /* Grain */
 .hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0.25;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
@@ -190,8 +193,7 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
 
 <nav>
   <div class="nav-logo">
-    <!-- Replace with: /images/peg-mark.png (transparent red paint stroke peg) -->
-    <img class="peg-mark" src="/mnt/user-data/uploads/ChatGPT_Image_Oct_16__2025__11_28_24_AM.png" alt="RedPeg" onerror="this.style.display='none'">
+    <img class="peg-mark" src="images/peg-mark.png" alt="RedPeg">
     <span>RedPeg</span>
   </div>
   <div class="nl">
@@ -216,8 +218,8 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
       title="RedPeg brand reel"
     ></iframe>
   </div>
-  <!-- IMAGE: /images/peg-mark.png — transparent red paint stroke -->
-  <img class="hero-peg" src="/mnt/user-data/uploads/ChatGPT_Image_Oct_16__2025__11_28_24_AM.png" alt="" onerror="this.style.display='none'">
+  <div class="hero-grad"></div>
+  <img class="hero-peg" src="images/peg-mark.png" alt="">
   <div class="hero-play-label">Watch Reel</div>
   <div class="hero-play" id="play-reel"><svg width="18" height="22" viewBox="0 0 18 22" fill="none"><path d="M2 1L16 11L2 21V1Z" fill="#D42030"/></svg></div>
 
@@ -270,10 +272,8 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
       <p class="quiet">We're fluent in AI and creative strategy, too. When you need help upstream, we're there. But our product is the actualization.</p>
     </div>
     <div class="promise-vis">
-      <!-- IMAGE: /images/peg-mark.png -->
-      <img class="promise-peg" src="/mnt/user-data/uploads/ChatGPT_Image_Oct_16__2025__11_28_24_AM.png" alt="" onerror="this.style.display='none'">
-      <!-- IMAGE: /images/promise-build.jpg — backstage production, stage build, fabrication shop -->
-      <img class="promise-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=80" alt="Production engineering">
+      <img class="promise-peg" src="images/peg-mark.png" alt="">
+      <img class="promise-img" src="images/promise-build.jpg" alt="Production engineering">
     </div>
   </div>
 </section>
@@ -286,8 +286,7 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
   <div class="specs-g">
 
     <div class="spec">
-      <!-- IMAGE: /images/spec-events.jpg — large crowd, festival aerial, outdoor activation -->
-      <img class="spec-img" src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=600&q=80" alt="Large-scale event production">
+      <img class="spec-img" src="images/spec-events.jpg" alt="Large-scale event production">
       <div class="spec-content">
         <div class="spec-num">Specialty 01</div>
         <div class="spec-t">Large-Scale Events</div>
@@ -299,8 +298,7 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
     </div>
 
     <div class="spec">
-      <!-- IMAGE: /images/spec-b2e.jpg — corporate stage, conference setup, AV rigging -->
-      <img class="spec-img" src="https://images.unsplash.com/photo-1587825140708-dfaf18c4f4d4?w=600&q=80" alt="Employee experience production">
+      <img class="spec-img" src="images/spec-b2e.jpg" alt="Employee experience production">
       <div class="spec-content">
         <div class="spec-num">Specialty 02</div>
         <div class="spec-t">Employee Experiences</div>
@@ -312,8 +310,7 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
     </div>
 
     <div class="spec">
-      <!-- IMAGE: /images/spec-music.jpg — concert stage, backstage, VIP area -->
-      <img class="spec-img" src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80" alt="Music partnership production">
+      <img class="spec-img" src="images/spec-music.jpg" alt="Music partnership production">
       <div class="spec-content">
         <div class="spec-num">Specialty 03</div>
         <div class="spec-t">Music Partnerships</div>
@@ -342,15 +339,15 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
   <h2 class="sh">They envisioned it. We built it.</h2>
   <div class="wg">
     <!-- IMAGE: /images/work-marriott-swift.jpg — concert VIP, backstage, fan experience -->
-    <div class="wc"><img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80" alt="Music loyalty activation"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ new enrollments / 3B+ impressions</div></div></div>
+    <div class="wc"><img src="images/work-marriott-swift.jpg" alt="Music loyalty activation"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ new enrollments / 3B+ impressions</div></div></div>
     <!-- IMAGE: /images/work-gaming-fest.jpg — large gaming event, crowd, outdoor festival -->
-    <div class="wc"><img src="https://images.unsplash.com/photo-1511882150382-421056c89033?w=900&q=80" alt="Gaming festival production"><div class="wi"><div class="wtag">Large-Scale Event / Gaming</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero operational failures</div></div></div>
+    <div class="wc"><img src="images/work-gaming-fest.jpg" alt="Gaming festival production"><div class="wi"><div class="wtag">Large-Scale Event / Gaming</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero operational failures</div></div></div>
   </div>
   <div class="wg2">
     <!-- IMAGE: /images/work-b2e-leadership.jpg — corporate stage, branded environment, keynote -->
-    <div class="wc"><img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=900&q=80" alt="Corporate leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year engagement / 10-12 cohorts / Full environment build + teardown each session</div></div></div>
+    <div class="wc"><img src="images/work-b2e-leadership.jpg" alt="Corporate leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year engagement / 10-12 cohorts / Full environment build + teardown each session</div></div></div>
     <!-- IMAGE: /images/work-f1-activation.jpg — motorsport, experiential, branded activation -->
-    <div class="wc"><img src="https://images.unsplash.com/photo-1504025468847-0e438279542c?w=900&q=80" alt="F1 sponsorship activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
+    <div class="wc"><img src="images/work-f1-activation.jpg" alt="F1 sponsorship activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
   </div>
 </section>
 
