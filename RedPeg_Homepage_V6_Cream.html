@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedPeg — You Envision It. We Build It.</title>
+<!-- Oswald → Garage Gothic | Plus Jakarta Sans → Gilroy -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F3EDE5;--cream-light:#F8F4EF;--cream-dark:#E6DFD5;
+  --red:#D42030;--red-d:#A8182A;--red-light:rgba(212,32,48,0.08);
+  --blk:#111;--blk-soft:#222;--text:#2A2A2A;--gray:#6B6560;--grayL:#9B9590;
+  --heading:'Oswald',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-x:hidden;}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 48px;background:rgba(243,237,229,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+/* The peg mark — replace src with /images/peg-mark.png */
+.peg-mark{height:36px;width:auto;}
+.nav-logo span{font-family:var(--heading);font-size:20px;font-weight:700;letter-spacing:3px;color:var(--blk);text-transform:uppercase;}
+.nl{display:flex;gap:28px;align-items:center;}
+.nl a{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.25s;}
+.nl a:hover{color:var(--red);}
+.nav-cta{background:var(--red);color:white;border:none;padding:9px 22px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-left:4px;}
+.nav-cta:hover{background:var(--red-d);}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;overflow:hidden;background:var(--cream);}
+
+/* Video bg — muted, desaturated, light */
+.hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-video{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(0.9) brightness(1.05);opacity:0.18;}
+.hero-poster{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80') center/cover no-repeat;filter:grayscale(100%) contrast(0.9) brightness(1.05);opacity:0.18;}
+
+/* Paint stroke peg — the signature element */
+.hero-peg{position:absolute;top:12%;right:10%;height:58vh;width:auto;z-index:1;opacity:0.6;}
+
+/* Grain */
+.hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0.25;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
+
+/* Play reel */
+.hero-play{position:absolute;top:42%;right:14%;transform:translateY(-50%);z-index:4;width:72px;height:72px;border-radius:50%;border:2px solid rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;background:rgba(255,255,255,0.6);backdrop-filter:blur(6px);}
+.hero-play:hover{border-color:var(--red);background:rgba(212,32,48,0.1);transform:translateY(-50%) scale(1.05);}
+.hero-play svg{margin-left:3px;}
+.hero-play-label{position:absolute;top:42%;right:calc(14% + 90px);transform:translateY(-50%);z-index:4;font-family:var(--heading);font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--grayL);writing-mode:vertical-rl;}
+
+.hero-c{position:relative;z-index:3;max-width:700px;}
+.hero-k{font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:24px;display:inline-flex;align-items:center;gap:12px;}
+.hero-k::before{content:'';width:32px;height:2px;background:var(--red);}
+.hero-h{font-family:var(--heading);font-size:clamp(44px,7.5vw,100px);font-weight:700;line-height:0.92;color:var(--blk);letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;}
+.hero-h .red{color:var(--red);}
+.hero-h .sub{font-family:var(--body);font-weight:300;font-style:italic;font-size:clamp(17px,2.4vw,34px);display:block;color:var(--gray);letter-spacing:0;line-height:1.45;margin-top:16px;text-transform:none;}
+.hero-p{font-size:15px;line-height:1.85;color:var(--gray);max-width:480px;margin-bottom:40px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-r{background:var(--red);color:white;border:none;padding:14px 34px;font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.btn-r:hover{background:var(--red-d);transform:translateY(-1px);}
+.btn-o{background:transparent;color:var(--blk);border:1.5px solid var(--blk);padding:13px 34px;font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.btn-o:hover{background:var(--blk);color:var(--cream);}
+
+/* ═══ VALUE STRIP ═══ */
+.vstrip{background:white;padding:52px 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;border-top:1px solid rgba(0,0,0,0.04);border-bottom:1px solid rgba(0,0,0,0.04);}
+.vs{position:relative;padding-left:18px;}
+.vs::before{content:'';position:absolute;left:0;top:2px;width:3px;height:100%;background:var(--red);border-radius:2px;}
+.vs-num{font-family:var(--heading);font-size:13px;font-weight:600;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px;}
+.vs-text{font-size:14px;line-height:1.75;color:var(--gray);}
+.vs-text strong{color:var(--text);font-weight:600;}
+
+/* ═══ PROMISE ═══ */
+.promise{background:var(--cream);padding:120px 48px;}
+.promise-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1100px;margin:0 auto;align-items:center;}
+.stag{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.promise-text h2{font-family:var(--heading);font-size:clamp(28px,3.2vw,44px);font-weight:700;line-height:1.1;margin-bottom:24px;text-transform:uppercase;letter-spacing:0.5px;color:var(--blk);}
+.promise-text h2 .red{color:var(--red);}
+.promise-text p{font-size:15px;line-height:1.85;color:var(--gray);margin-bottom:16px;}
+.promise-text p strong{color:var(--text);font-weight:600;}
+.promise-text .quiet{font-size:13px;color:var(--grayL);font-style:italic;margin-top:24px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.06);}
+.promise-vis{position:relative;}
+/* IMAGE: /images/promise-build.jpg — production workshop, fabrication, backstage build */
+.promise-img{width:100%;height:420px;object-fit:cover;filter:grayscale(100%) contrast(1.1);}
+.promise-peg{position:absolute;top:-24px;left:-18px;height:260px;width:auto;opacity:0.5;}
+
+/* ═══ THREE SPECIALTIES ═══ */
+.specs{background:white;padding:120px 48px;border-top:1px solid rgba(0,0,0,0.04);}
+.sh{font-family:var(--heading);font-size:clamp(32px,4vw,56px);font-weight:700;line-height:1.08;margin-bottom:18px;text-transform:uppercase;letter-spacing:1px;color:var(--blk);}
+.ssub{font-size:14px;color:var(--gray);line-height:1.75;max-width:540px;margin-bottom:56px;}
+.specs-g{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.spec{position:relative;overflow:hidden;cursor:pointer;background:var(--cream);border:1px solid rgba(0,0,0,0.04);transition:border-color 0.3s;}
+.spec:hover{border-color:var(--red);}
+/* IMAGE: /images/spec-events.jpg, /images/spec-b2e.jpg, /images/spec-music.jpg */
+.spec-img{width:100%;height:280px;object-fit:cover;filter:grayscale(100%) contrast(1.1);transition:transform 0.5s;}
+.spec:hover .spec-img{transform:scale(1.03);}
+.spec-content{padding:32px 28px;}
+.spec-num{font-family:var(--heading);font-size:11px;font-weight:600;letter-spacing:3px;color:var(--red);margin-bottom:10px;}
+.spec-t{font-family:var(--heading);font-size:24px;font-weight:700;letter-spacing:1px;color:var(--blk);margin-bottom:12px;text-transform:uppercase;}
+.spec-d{font-size:13.5px;line-height:1.75;color:var(--gray);margin-bottom:16px;}
+.spec-proof{font-size:12px;line-height:1.6;color:var(--grayL);margin-bottom:16px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.05);}
+.spec-cl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);opacity:0.7;}
+.spec-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);text-decoration:none;margin-top:16px;transition:gap 0.2s;}
+.spec-link:hover{gap:12px;}
+
+/* ═══ PROOF ═══ */
+.proof{background:var(--cream);padding:64px 48px;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(0,0,0,0.04);border-bottom:1px solid rgba(0,0,0,0.04);}
+.proof-i{text-align:center;padding:24px 12px;border-right:1px solid rgba(0,0,0,0.04);}
+.proof-i:last-child{border-right:none;}
+.proof-n{font-family:var(--heading);font-size:44px;font-weight:700;color:var(--red);line-height:1;}
+.proof-l{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grayL);margin-top:5px;}
+
+/* ═══ WORK ═══ */
+.work{background:var(--cream);padding:120px 48px;}
+/* IMAGE: /images/work-marriott-swift.jpg, /images/work-gaming-fest.jpg, /images/work-b2e-conference.jpg, /images/work-f1-activation.jpg */
+.wg{display:grid;grid-template-columns:1.3fr 0.7fr;gap:3px;margin-top:48px;}
+.wg2{display:grid;grid-template-columns:0.7fr 1.3fr;gap:3px;margin-top:3px;}
+.wc{position:relative;overflow:hidden;cursor:pointer;min-height:380px;background:var(--blk);}
+.wc img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%) contrast(1.1);transition:all 0.5s;}
+.wc:hover img{transform:scale(1.03);filter:grayscale(60%) contrast(1.1);}
+.wi{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,transparent 50%);padding:32px;display:flex;flex-direction:column;justify-content:flex-end;}
+.wtag{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.wt{font-family:var(--heading);font-size:22px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;}
+.wm{font-size:12px;color:rgba(255,255,255,0.45);margin-top:5px;}
+
+/* ═══ PARTNERS ═══ */
+.partners{background:white;padding:56px 48px;text-align:center;border-top:1px solid rgba(0,0,0,0.04);}
+.partners-lab{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--grayL);margin-bottom:32px;}
+/* Replace with actual logo PNGs: /images/logo-marriott.png, etc. */
+.plogos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:44px;opacity:0.25;}
+.plogos span{font-family:var(--heading);font-size:18px;font-weight:600;letter-spacing:3px;color:var(--blk);text-transform:uppercase;}
+
+/* ═══ CTA ═══ */
+.cta{background:var(--red);padding:100px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'BUILD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--heading);font-size:22vw;font-weight:700;color:rgba(255,255,255,0.03);pointer-events:none;text-transform:uppercase;}
+.cta h2{font-family:var(--heading);font-size:clamp(28px,3.8vw,52px);font-weight:700;color:white;margin-bottom:14px;position:relative;z-index:1;text-transform:uppercase;letter-spacing:1px;}
+.cta p{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:36px;position:relative;z-index:1;}
+.btn-w{background:white;color:var(--red);border:none;padding:14px 40px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;}
+.btn-w:hover{background:var(--cream);transform:translateY(-1px);}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;border-top:3px solid var(--red);}
+.fb{font-family:var(--heading);font-size:17px;font-weight:600;letter-spacing:3px;color:white;text-transform:uppercase;margin-bottom:10px;}
+.ftl{font-size:13px;color:rgba(255,255,255,0.2);line-height:1.75;max-width:260px;}
+.fc h4{font-family:var(--heading);font-size:12px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,0.15);text-transform:uppercase;margin-bottom:12px;}
+.fc a{display:block;font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}
+.fc a:hover{color:white;}
+.fbot{grid-column:1/-1;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;}
+.fbot span{font-size:10px;color:rgba(255,255,255,0.12);}
+.fso{display:flex;gap:8px;}
+.fso a{width:26px;height:26px;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,0.18);text-decoration:none;transition:all 0.2s;}
+.fso a:hover{border-color:var(--red);color:var(--red);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.hero-c{animation:fadeUp 0.8s ease 0.15s both;}
+.hero-peg{animation:fadeIn 1.1s ease 0.4s both;}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}.nl{display:none;}
+  .hero{padding:110px 24px 60px;}.hero-play,.hero-play-label{display:none;}.hero-peg{right:4%;height:40vh;opacity:0.35;}
+  .vstrip{grid-template-columns:1fr;gap:24px;padding:40px 24px;}
+  .promise-grid{grid-template-columns:1fr;gap:40px;}
+  .specs-g{grid-template-columns:1fr;}
+  .proof{grid-template-columns:repeat(2,1fr);}.proof-i:nth-child(5){grid-column:1/-1;}
+  .wg,.wg2{grid-template-columns:1fr;}
+  section,.specs,.promise{padding:80px 24px;}
+  footer{grid-template-columns:1fr 1fr;gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <!-- Replace with: /images/peg-mark.png (transparent red paint stroke peg) -->
+    <img class="peg-mark" src="/mnt/user-data/uploads/ChatGPT_Image_Oct_16__2025__11_28_24_AM.png" alt="RedPeg" onerror="this.style.display='none'">
+    <span>RedPeg</span>
+  </div>
+  <div class="nl">
+    <a href="#specs">Specialties</a>
+    <a href="#work">Work</a>
+    <a href="#">About</a>
+    <a href="#">Insights</a>
+    <button class="nav-cta">Start a Project</button>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-video-wrap">
+    <div class="hero-poster"></div>
+    <!-- VIDEO: replace with RedPeg brand reel -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <!-- <source src="/video/rp-reel.mp4" type="video/mp4"> -->
+    </video>
+  </div>
+  <!-- IMAGE: /images/peg-mark.png — transparent red paint stroke -->
+  <img class="hero-peg" src="/mnt/user-data/uploads/ChatGPT_Image_Oct_16__2025__11_28_24_AM.png" alt="" onerror="this.style.display='none'">
+  <div class="hero-play-label">Watch Reel</div>
+  <div class="hero-play"><svg width="18" height="22" viewBox="0 0 18 22" fill="none"><path d="M2 1L16 11L2 21V1Z" fill="#D42030"/></svg></div>
+  <div class="hero-c">
+    <div class="hero-k">Independent Production + Experience Agency</div>
+    <h1 class="hero-h">
+      AI <span class="red">THINKS</span> IT.<br>WE BUILD IT.
+      <span class="sub">You have the vision. The renders. The strategy.<br>We're the team that makes it physical.</span>
+    </h1>
+    <p class="hero-p">Your AI can generate the concept in an afternoon. Your internal team can write the brief. The part that still takes 30 years of expertise: turning all of it into a flawless, real-world experience.</p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-r">See What We've Built</a>
+      <a href="#" class="btn-o">Talk to a Producer</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ VALUE STRIP ═══════ -->
+<div class="vstrip">
+  <div class="vs">
+    <div class="vs-num">01</div>
+    <div class="vs-text"><strong>You bring the vision.</strong> AI-generated renders, internal creative, agency concepts, napkin sketches. We've built from all of them.</div>
+  </div>
+  <div class="vs">
+    <div class="vs-num">02</div>
+    <div class="vs-text"><strong>We translate and engineer.</strong> CAD, fabrication specs, vendor packages, permits, staffing plans. The bridge between screen and street.</div>
+  </div>
+  <div class="vs">
+    <div class="vs-num">03</div>
+    <div class="vs-text"><strong>We build it. Flawlessly.</strong> 80,000-person festivals. Global loyalty programs across 87 properties. Multi-year leadership experiences. 30 years, zero missed curtain calls.</div>
+  </div>
+</div>
+
+<!-- ═══════ THE PROMISE ═══════ -->
+<section class="promise">
+  <div class="promise-grid">
+    <div class="promise-text">
+      <div class="stag">Why RedPeg</div>
+      <h2>YOUR VISION IS <span class="red">FURTHER ALONG</span> THAN EVER.<br>THE LAST MILE HASN'T CHANGED.</h2>
+      <p>Brands are moving faster. AI tools, internal creative teams, and consultancies are producing strategies, concepts, and visualizations at a pace that didn't exist two years ago.</p>
+      <p><strong>The back end hasn't changed.</strong> Someone still has to translate that concept into engineering drawings. Negotiate the venue. Manage the fabrication. Hire and train the crew. Secure the permits. And make sure the experience is flawless when the doors open.</p>
+      <p>We've been that team for 30 years. The tools that get you to the brief got better. The team that takes you from brief to reality is still us.</p>
+      <p class="quiet">We're fluent in AI and creative strategy, too. When you need help upstream, we're there. But our product is the actualization.</p>
+    </div>
+    <div class="promise-vis">
+      <!-- IMAGE: /images/peg-mark.png -->
+      <img class="promise-peg" src="/mnt/user-data/uploads/ChatGPT_Image_Oct_16__2025__11_28_24_AM.png" alt="" onerror="this.style.display='none'">
+      <!-- IMAGE: /images/promise-build.jpg — backstage production, stage build, fabrication shop -->
+      <img class="promise-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=80" alt="Production engineering">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ THREE SPECIALTIES ═══════ -->
+<section class="specs" id="specs">
+  <div class="stag">Our Specialties</div>
+  <h2 class="sh">Three disciplines. One standard.</h2>
+  <p class="ssub">Every engagement is execution-led. You bring the vision, content, and strategy. We translate, engineer, produce, and deliver.</p>
+  <div class="specs-g">
+
+    <div class="spec">
+      <!-- IMAGE: /images/spec-events.jpg — large crowd, festival aerial, outdoor activation -->
+      <img class="spec-img" src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=600&q=80" alt="Large-scale event production">
+      <div class="spec-content">
+        <div class="spec-num">Specialty 01</div>
+        <div class="spec-t">Large-Scale Events</div>
+        <p class="spec-d">Festivals, sponsorship activations, mobile tours, pop-ups, trade shows. End-to-end production from concept translation through on-site execution. Any scale, any market.</p>
+        <p class="spec-proof">80K-person gaming festivals / Multi-country sponsorship activations / F1 fan zones and VIP experiences / Mobile tours across 15+ cities</p>
+        <div class="spec-cl">Marriott / Santander / Meta / VA Lottery / Toei</div>
+        <a href="#" class="spec-link">See the work &rarr;</a>
+      </div>
+    </div>
+
+    <div class="spec">
+      <!-- IMAGE: /images/spec-b2e.jpg — corporate stage, conference setup, AV rigging -->
+      <img class="spec-img" src="https://images.unsplash.com/photo-1587825140708-dfaf18c4f4d4?w=600&q=80" alt="Employee experience production">
+      <div class="spec-content">
+        <div class="spec-num">Specialty 02</div>
+        <div class="spec-t">Employee Experiences</div>
+        <p class="spec-d">Internal conferences, leadership development, culture events. You provide the content and vision. We build the environment, manage the production, and run the show.</p>
+        <p class="spec-proof">3-year Fortune 100 leadership program, 10-12 cohorts / 15 annual employee picnics / Military convention activations / Corporate appreciation events</p>
+        <div class="spec-cl">USAA / In-N-Out / Fannie Mae / Obsidian</div>
+        <a href="#" class="spec-link">See the work &rarr;</a>
+      </div>
+    </div>
+
+    <div class="spec">
+      <!-- IMAGE: /images/spec-music.jpg — concert stage, backstage, VIP area -->
+      <img class="spec-img" src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80" alt="Music partnership production">
+      <div class="spec-content">
+        <div class="spec-num">Specialty 03</div>
+        <div class="spec-t">Music Partnerships</div>
+        <p class="spec-d">Artist tour VIP experiences, festival brand activations, music programming. Deep Cuts Entertainment, our in-house subsidiary, brings 60+ years of combined music industry expertise.</p>
+        <p class="spec-proof">87-property global loyalty x artist program / VIP tour experiences across dozens of cities / Active 2026 summer tours in production now</p>
+        <div class="spec-cl">Marriott Bonvoy / Yuengling / Deep Cuts Entertainment</div>
+        <a href="#" class="spec-link">See the work &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ PROOF ═══════ -->
+<div class="proof">
+  <div class="proof-i"><div class="proof-n">30</div><div class="proof-l">Years Independent</div></div>
+  <div class="proof-i"><div class="proof-n">80K</div><div class="proof-l">Largest Single Event</div></div>
+  <div class="proof-i"><div class="proof-n">87</div><div class="proof-l">Properties, One Program</div></div>
+  <div class="proof-i"><div class="proof-n">500K+</div><div class="proof-l">Enrollments, One Activation</div></div>
+  <div class="proof-i"><div class="proof-n">3B+</div><div class="proof-l">Total Impressions</div></div>
+</div>
+
+<!-- ═══════ WORK ═══════ -->
+<section class="work" id="work">
+  <div class="stag">Selected Work</div>
+  <h2 class="sh">They envisioned it. We built it.</h2>
+  <div class="wg">
+    <!-- IMAGE: /images/work-marriott-swift.jpg — concert VIP, backstage, fan experience -->
+    <div class="wc"><img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80" alt="Music loyalty activation"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ new enrollments / 3B+ impressions</div></div></div>
+    <!-- IMAGE: /images/work-gaming-fest.jpg — large gaming event, crowd, outdoor festival -->
+    <div class="wc"><img src="https://images.unsplash.com/photo-1511882150382-421056c89033?w=900&q=80" alt="Gaming festival production"><div class="wi"><div class="wtag">Large-Scale Event / Gaming</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero operational failures</div></div></div>
+  </div>
+  <div class="wg2">
+    <!-- IMAGE: /images/work-b2e-leadership.jpg — corporate stage, branded environment, keynote -->
+    <div class="wc"><img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=900&q=80" alt="Corporate leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year engagement / 10-12 cohorts / Full environment build + teardown each session</div></div></div>
+    <!-- IMAGE: /images/work-f1-activation.jpg — motorsport, experiential, branded activation -->
+    <div class="wc"><img src="https://images.unsplash.com/photo-1504025468847-0e438279542c?w=900&q=80" alt="F1 sponsorship activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
+  </div>
+</section>
+
+<!-- ═══════ PARTNERS ═══════ -->
+<div class="partners">
+  <div class="partners-lab">Trusted by brands that demand flawless execution</div>
+  <div class="plogos">
+    <!-- NOTE: No Scopely or Nike per MSA. Replace spans with /images/logo-[client].png -->
+    <span>Marriott Bonvoy</span>
+    <span>Coca-Cola</span>
+    <span>USAA</span>
+    <span>Santander</span>
+    <span>Meta</span>
+    <span>In-N-Out</span>
+    <span>Capital One</span>
+    <span>Toei</span>
+  </div>
+</div>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="cta">
+  <h2>You bring the vision.<br>We bring the hard hats.</h2>
+  <p>30 years of turning ideas into experiences. Let's build yours.</p>
+  <button class="btn-w">Start a Conversation</button>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div>
+    <div class="fb">RedPeg</div>
+    <p class="ftl">Independent production and experience agency. Fiercely independent since 1995.</p>
+  </div>
+  <div class="fc">
+    <h4>Specialties</h4>
+    <a href="#">Large-Scale Events</a>
+    <a href="#">Employee Experiences</a>
+    <a href="#">Music Partnerships</a>
+    <a href="#">All Work</a>
+  </div>
+  <div class="fc">
+    <h4>Company</h4>
+    <a href="#">About</a>
+    <a href="#">Team</a>
+    <a href="#">Insights</a>
+    <a href="#">Careers</a>
+  </div>
+  <div class="fc">
+    <h4>Find Us</h4>
+    <a href="#">727 N Washington St</a>
+    <a href="#">Alexandria, VA 22314</a>
+    <a href="#">703-519-9000</a>
+    <a href="#">hello@redpeg.com</a>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span>
+    <div class="fso"><a href="#">Li</a><a href="#">Ig</a><a href="#">X</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
