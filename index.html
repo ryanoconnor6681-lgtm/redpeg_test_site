@@ -3,328 +3,431 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RedPeg — You Envision It. We Build It.</title>
-<!-- Oswald → Garage Gothic | Plus Jakarta Sans → Gilroy -->
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<title>RedPeg — Meet Red</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --cream:#F3EDE5;--cream-light:#F8F4EF;--cream-dark:#E6DFD5;
-  --red:#D42030;--red-d:#A8182A;--red-light:rgba(212,32,48,0.08);
-  --blk:#111;--blk-soft:#222;--text:#2A2A2A;--gray:#6B6560;--grayL:#9B9590;
-  --heading:'Oswald',sans-serif;--body:'Plus Jakarta Sans',sans-serif;
+  --cream:#F3EDE5;--cream2:#EDE7DF;--white:#FAFAF7;
+  --red:#D42030;--red-d:#A8182A;--red-glow:rgba(212,32,48,0.12);
+  --blk:#0C0C0C;--blk2:#161616;--text:#1A1A1A;--gray:#6B6560;--grayL:#9B9590;
+  --display:'Anton',sans-serif;--body:'Outfit',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-x:hidden;}
+::selection{background:var(--red);color:white;}
 
 /* ═══ NAV ═══ */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:16px 48px;background:rgba(243,237,229,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;mix-blend-mode:difference;pointer-events:none;}
+.nav *{pointer-events:auto;}
 .nav-logo{display:flex;align-items:center;gap:10px;}
-/* The peg mark — replace src with /images/peg-mark.png */
-.peg-mark{height:36px;width:auto;}
-.nav-logo span{font-family:var(--heading);font-size:20px;font-weight:700;letter-spacing:3px;color:var(--blk);text-transform:uppercase;}
-.nl{display:flex;gap:28px;align-items:center;}
-.nl a{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.25s;}
-.nl a:hover{color:var(--red);}
-.nav-cta{background:var(--red);color:white;border:none;padding:9px 22px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-left:4px;}
-.nav-cta:hover{background:var(--red-d);}
+.nav-logo img{height:32px;}
+.nav-logo span{font-family:var(--display);font-size:22px;color:white;text-transform:uppercase;letter-spacing:2px;}
+.nav-r{display:flex;gap:24px;align-items:center;}
+.nav-r a{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:white;text-decoration:none;transition:opacity 0.2s;opacity:0.6;}
+.nav-r a:hover{opacity:1;}
+.nav-cta{background:white;color:var(--blk);border:none;padding:8px 20px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;mix-blend-mode:normal;transition:background 0.2s;}
 
-/* ═══ HERO ═══ */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;overflow:hidden;background:var(--cream);}
-
-/* Video bg — YouTube iframe as background */
-.hero-video-wrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
-.hero-video-wrap iframe{
-  position:absolute;top:50%;left:50%;
-  width:120vw;height:120vh; /* Oversize to cover + crop YouTube chrome */
-  transform:translate(-50%,-50%);
-  filter:grayscale(30%) contrast(1.1) brightness(0.7);opacity:0.6;
-  border:none;
+/* ═══ HERO — RED SPEAKS ═══ */
+.hero{min-height:100vh;background:var(--blk);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 40px 60px;position:relative;overflow:hidden;}
+/* Peg watermark */
+.hero-peg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:80vh;opacity:0.04;pointer-events:none;}
+/* Video bg very subtle */
+.hero-vid{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.hero-vid iframe{position:absolute;top:50%;left:50%;width:180vw;height:180vh;transform:translate(-50%,-50%);border:none;opacity:0.08;filter:grayscale(60%) brightness(0.5);}
+.hero-content{position:relative;z-index:2;max-width:800px;width:100%;}
+.hero-greeting{font-family:var(--body);font-size:16px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:32px;opacity:0;animation:fadeIn 0.8s ease 0.3s forwards;}
+.hero-name{font-family:var(--display);font-size:clamp(80px,14vw,180px);color:white;text-transform:uppercase;line-height:0.85;margin-bottom:12px;opacity:0;animation:fadeIn 0.6s ease 0.5s forwards;}
+.hero-name .red{color:var(--red);}
+.hero-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,0.35);max-width:500px;margin:0 auto 48px;line-height:1.7;opacity:0;animation:fadeIn 0.6s ease 0.8s forwards;}
+/* The input — BIG and central */
+.red-input-wrap{position:relative;max-width:620px;width:100%;margin:0 auto;opacity:0;animation:fadeUp 0.7s ease 1s forwards;}
+.red-input{
+  width:100%;padding:20px 60px 20px 24px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  color:white;font-family:var(--body);font-size:16px;font-weight:300;
+  outline:none;transition:all 0.3s;border-radius:0;
 }
-/* Poster fallback — visible until iframe loads */
-.hero-poster{position:absolute;inset:0;background:url('images/hero-poster.jpg') center/cover no-repeat;filter:grayscale(30%) contrast(1.1) brightness(0.7);opacity:0.55;transition:opacity 0.5s;}
-.hero-poster.hidden{opacity:0;}
+.red-input::placeholder{color:rgba(255,255,255,0.25);}
+.red-input:focus{border-color:var(--red);background:rgba(255,255,255,0.08);box-shadow:0 0 40px var(--red-glow);}
+.red-send{
+  position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;background:var(--red);border:none;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background 0.2s;
+}
+.red-send:hover{background:var(--red-d);}
+.red-send svg{width:18px;height:18px;}
+/* Suggested prompts */
+.red-prompts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px;opacity:0;animation:fadeIn 0.6s ease 1.3s forwards;}
+.red-prompt{
+  padding:8px 16px;border:1px solid rgba(255,255,255,0.08);
+  font-size:12px;color:rgba(255,255,255,0.3);cursor:pointer;
+  transition:all 0.2s;background:transparent;font-family:var(--body);
+}
+.red-prompt:hover{border-color:var(--red);color:var(--red);background:rgba(212,32,48,0.05);}
 
-/* Paint stroke peg — the signature element */
-.hero-peg{position:absolute;top:12%;right:10%;height:58vh;width:auto;z-index:1;opacity:0.6;}
+/* Response area */
+.red-response{
+  max-width:620px;width:100%;margin:32px auto 0;min-height:0;
+  text-align:left;overflow:hidden;transition:all 0.3s;
+}
+.red-msg{padding:20px 24px;background:rgba(255,255,255,0.04);border-left:3px solid var(--red);margin-bottom:12px;animation:fadeUp 0.4s ease both;}
+.red-msg p{font-size:14px;line-height:1.8;color:rgba(255,255,255,0.6);}
+.red-msg p strong{color:rgba(255,255,255,0.85);font-weight:600;}
+.red-msg .label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.user-msg{background:rgba(255,255,255,0.02);border-left-color:rgba(255,255,255,0.15);}
+.user-msg .label{color:rgba(255,255,255,0.3);}
+.typing{display:inline-flex;gap:4px;padding:8px 0;}
+.typing span{width:6px;height:6px;background:var(--red);border-radius:50%;opacity:0.4;animation:blink 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:0.2s;}
+.typing span:nth-child(3){animation-delay:0.4s;}
+@keyframes blink{0%,100%{opacity:0.3}50%{opacity:1}}
 
-/* Cream gradient over video for text readability */
-.hero-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(243,237,229,0.92) 0%,rgba(243,237,229,0.7) 40%,rgba(243,237,229,0.25) 65%,rgba(243,237,229,0.05) 100%);}
+/* Scroll indicator */
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 0.6s ease 1.6s forwards;}
+.scroll-hint span{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,rgba(255,255,255,0.2),transparent);animation:scrollPulse 2s infinite;}
+@keyframes scrollPulse{0%{opacity:0.3;transform:scaleY(0.6)}50%{opacity:1;transform:scaleY(1)}100%{opacity:0.3;transform:scaleY(0.6)}}
 
-/* Grain */
-.hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0.25;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");}
-
-/* Play reel */
-.hero-play{position:absolute;top:42%;right:14%;transform:translateY(-50%);z-index:4;width:72px;height:72px;border-radius:50%;border:2px solid rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;background:rgba(255,255,255,0.6);backdrop-filter:blur(6px);}
-.hero-play:hover{border-color:var(--red);background:rgba(212,32,48,0.1);transform:translateY(-50%) scale(1.05);}
-.hero-play svg{margin-left:3px;}
-.hero-play-label{position:absolute;top:42%;right:calc(14% + 90px);transform:translateY(-50%);z-index:4;font-family:var(--heading);font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--grayL);writing-mode:vertical-rl;}
-
-.hero-c{position:relative;z-index:3;max-width:700px;}
-.hero-k{font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:24px;display:inline-flex;align-items:center;gap:12px;}
-.hero-k::before{content:'';width:32px;height:2px;background:var(--red);}
-.hero-h{font-family:var(--heading);font-size:clamp(44px,7.5vw,100px);font-weight:700;line-height:0.92;color:var(--blk);letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;}
-.hero-h .red{color:var(--red);}
-.hero-h .sub{font-family:var(--body);font-weight:300;font-style:italic;font-size:clamp(17px,2.4vw,34px);display:block;color:var(--gray);letter-spacing:0;line-height:1.45;margin-top:16px;text-transform:none;}
-.hero-p{font-size:15px;line-height:1.85;color:var(--gray);max-width:480px;margin-bottom:40px;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-.btn-r{background:var(--red);color:white;border:none;padding:14px 34px;font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
-.btn-r:hover{background:var(--red-d);transform:translateY(-1px);}
-.btn-o{background:transparent;color:var(--blk);border:1.5px solid var(--blk);padding:13px 34px;font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
-.btn-o:hover{background:var(--blk);color:var(--cream);}
+/* ═══ MANIFESTO ═══ */
+.manifesto{background:var(--red);padding:80px 40px;overflow:hidden;position:relative;}
+.man-track{display:flex;gap:80px;white-space:nowrap;animation:ticker 25s linear infinite;}
+.man-item{font-family:var(--display);font-size:clamp(48px,7vw,90px);color:rgba(255,255,255,0.15);text-transform:uppercase;flex-shrink:0;}
+.man-item .solid{color:white;}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ═══ VALUE STRIP ═══ */
-.vstrip{background:white;padding:52px 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;border-top:1px solid rgba(0,0,0,0.04);border-bottom:1px solid rgba(0,0,0,0.04);}
+.vstrip{background:var(--white);padding:56px 40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;border-top:1px solid rgba(0,0,0,0.04);border-bottom:1px solid rgba(0,0,0,0.04);}
 .vs{position:relative;padding-left:18px;}
 .vs::before{content:'';position:absolute;left:0;top:2px;width:3px;height:100%;background:var(--red);border-radius:2px;}
-.vs-num{font-family:var(--heading);font-size:13px;font-weight:600;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px;}
-.vs-text{font-size:14px;line-height:1.75;color:var(--gray);}
+.vs-num{font-family:var(--display);font-size:14px;letter-spacing:3px;color:var(--red);margin-bottom:8px;}
+.vs-text{font-size:14px;line-height:1.8;color:var(--gray);}
 .vs-text strong{color:var(--text);font-weight:600;}
 
+/* ═══ SECTIONS SHARED ═══ */
+.stag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.sec-h{font-family:var(--display);font-size:clamp(36px,5vw,72px);text-transform:uppercase;line-height:0.95;margin-bottom:24px;color:var(--blk);}
+
 /* ═══ PROMISE ═══ */
-.promise{background:var(--cream);padding:120px 48px;}
-.promise-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1100px;margin:0 auto;align-items:center;}
-.stag{font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
-.promise-text h2{font-family:var(--heading);font-size:clamp(28px,3.2vw,44px);font-weight:700;line-height:1.1;margin-bottom:24px;text-transform:uppercase;letter-spacing:0.5px;color:var(--blk);}
-.promise-text h2 .red{color:var(--red);}
+.promise{padding:140px 40px;background:var(--cream);}
+.promise-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1200px;margin:0 auto;align-items:center;}
 .promise-text p{font-size:15px;line-height:1.85;color:var(--gray);margin-bottom:16px;}
 .promise-text p strong{color:var(--text);font-weight:600;}
 .promise-text .quiet{font-size:13px;color:var(--grayL);font-style:italic;margin-top:24px;padding-top:18px;border-top:1px solid rgba(0,0,0,0.06);}
 .promise-vis{position:relative;}
-/* IMAGE: /images/promise-build.jpg — production workshop, fabrication, backstage build */
-.promise-img{width:100%;height:420px;object-fit:cover;filter:grayscale(100%) contrast(1.1);}
-.promise-peg{position:absolute;top:-24px;left:-18px;height:260px;width:auto;opacity:0.5;}
+.promise-img{width:100%;height:480px;object-fit:cover;filter:grayscale(100%) contrast(1.1);}
+.promise-peg{position:absolute;top:-28px;left:-20px;height:280px;opacity:0.45;}
 
-/* ═══ THREE SPECIALTIES ═══ */
-.specs{background:white;padding:120px 48px;border-top:1px solid rgba(0,0,0,0.04);}
-.sh{font-family:var(--heading);font-size:clamp(32px,4vw,56px);font-weight:700;line-height:1.08;margin-bottom:18px;text-transform:uppercase;letter-spacing:1px;color:var(--blk);}
-.ssub{font-size:14px;color:var(--gray);line-height:1.75;max-width:540px;margin-bottom:56px;}
-.specs-g{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.spec{position:relative;overflow:hidden;cursor:pointer;background:var(--cream);border:1px solid rgba(0,0,0,0.04);transition:border-color 0.3s;}
-.spec:hover{border-color:var(--red);}
-/* IMAGE: /images/spec-events.jpg, /images/spec-b2e.jpg, /images/spec-music.jpg */
-.spec-img{width:100%;height:280px;object-fit:cover;filter:grayscale(100%) contrast(1.1);transition:transform 0.5s;}
-.spec:hover .spec-img{transform:scale(1.03);}
-.spec-content{padding:32px 28px;}
-.spec-num{font-family:var(--heading);font-size:11px;font-weight:600;letter-spacing:3px;color:var(--red);margin-bottom:10px;}
-.spec-t{font-family:var(--heading);font-size:24px;font-weight:700;letter-spacing:1px;color:var(--blk);margin-bottom:12px;text-transform:uppercase;}
-.spec-d{font-size:13.5px;line-height:1.75;color:var(--gray);margin-bottom:16px;}
-.spec-proof{font-size:12px;line-height:1.6;color:var(--grayL);margin-bottom:16px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.05);}
-.spec-cl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);opacity:0.7;}
-.spec-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);text-decoration:none;margin-top:16px;transition:gap 0.2s;}
-.spec-link:hover{gap:12px;}
+/* ═══ SPECIALTIES ═══ */
+.specs{padding:140px 40px;background:var(--white);}
+.specs-g{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.spec{position:relative;overflow:hidden;cursor:pointer;background:var(--cream);}
+.spec-img{width:100%;height:360px;object-fit:cover;filter:grayscale(100%) contrast(1.1);transition:all 0.6s cubic-bezier(0.2,0,0.2,1);}
+.spec:hover .spec-img{transform:scale(1.05);filter:grayscale(50%) contrast(1.1);}
+.spec-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,0.92) 0%,rgba(10,10,10,0.15) 55%,transparent 100%);padding:32px;display:flex;flex-direction:column;justify-content:flex-end;transition:background 0.4s;}
+.spec:hover .spec-ov{background:linear-gradient(to top,rgba(10,10,10,0.96) 0%,rgba(10,10,10,0.4) 55%,rgba(10,10,10,0.15) 100%);}
+.spec-paint{position:absolute;top:0;left:0;width:4px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:top;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
+.spec:hover .spec-paint{transform:scaleY(1);}
+.spec-num{font-family:var(--display);font-size:80px;color:rgba(255,255,255,0.03);position:absolute;top:12px;right:16px;text-transform:uppercase;}
+.spec-t{font-family:var(--display);font-size:28px;color:white;text-transform:uppercase;margin-bottom:8px;letter-spacing:1px;}
+.spec-d{font-size:13px;line-height:1.7;color:rgba(255,255,255,0.4);margin-bottom:12px;max-height:0;overflow:hidden;transition:max-height 0.5s ease,opacity 0.4s;opacity:0;}
+.spec:hover .spec-d{max-height:200px;opacity:1;}
+.spec-cl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);opacity:0.6;}
+
+/* Specialty intro text */
+.specs-why{font-size:15px;line-height:1.85;color:var(--gray);max-width:620px;margin-bottom:56px;}
+
+/* Expanded detail panels below cards */
+.specs-detail{margin-top:80px;display:flex;flex-direction:column;gap:48px;max-width:1100px;}
+.sd{display:grid;grid-template-columns:80px 1fr;gap:24px;padding-bottom:48px;border-bottom:1px solid rgba(0,0,0,0.05);}
+.sd:last-child{border-bottom:none;}
+.sd-num{font-family:var(--display);font-size:48px;color:rgba(0,0,0,0.06);line-height:1;}
+.sd-content h3{font-family:var(--display);font-size:28px;text-transform:uppercase;letter-spacing:1px;color:var(--blk);margin-bottom:20px;}
+.sd-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:20px;}
+.sd-label{font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.sd-cols p{font-size:14px;line-height:1.8;color:var(--gray);}
+.sd-proof{font-size:12px;line-height:1.6;color:var(--grayL);padding-top:16px;border-top:1px solid rgba(0,0,0,0.04);}
+
+/* Why these three box */
+.specs-why-box{margin-top:80px;padding:48px;background:var(--cream);border-left:4px solid var(--red);max-width:800px;}
+.specs-why-box .stag{margin-bottom:12px;}
+.specs-why-box p{font-size:15px;line-height:1.85;color:var(--gray);}
 
 /* ═══ PROOF ═══ */
-.proof{background:var(--cream);padding:64px 48px;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(0,0,0,0.04);border-bottom:1px solid rgba(0,0,0,0.04);}
-.proof-i{text-align:center;padding:24px 12px;border-right:1px solid rgba(0,0,0,0.04);}
+.proof{background:var(--blk);padding:80px 40px;display:grid;grid-template-columns:repeat(5,1fr);}
+.proof-i{text-align:center;padding:32px 16px;border-right:1px solid rgba(255,255,255,0.04);}
 .proof-i:last-child{border-right:none;}
-.proof-n{font-family:var(--heading);font-size:44px;font-weight:700;color:var(--red);line-height:1;}
-.proof-l{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--grayL);margin-top:5px;}
+.proof-n{font-family:var(--display);font-size:52px;color:var(--red);line-height:1;}
+.proof-l{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:6px;}
 
 /* ═══ WORK ═══ */
-.work{background:var(--cream);padding:120px 48px;}
-/* IMAGE: /images/work-marriott-swift.jpg, /images/work-gaming-fest.jpg, /images/work-b2e-conference.jpg, /images/work-f1-activation.jpg */
-.wg{display:grid;grid-template-columns:1.3fr 0.7fr;gap:3px;margin-top:48px;}
-.wg2{display:grid;grid-template-columns:0.7fr 1.3fr;gap:3px;margin-top:3px;}
-.wc{position:relative;overflow:hidden;cursor:pointer;min-height:380px;background:var(--blk);}
-.wc img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%) contrast(1.1);transition:all 0.5s;}
-.wc:hover img{transform:scale(1.03);filter:grayscale(60%) contrast(1.1);}
-.wi{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,transparent 50%);padding:32px;display:flex;flex-direction:column;justify-content:flex-end;}
-.wtag{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
-.wt{font-family:var(--heading);font-size:22px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;}
-.wm{font-size:12px;color:rgba(255,255,255,0.45);margin-top:5px;}
+.work{padding:140px 40px;background:var(--cream);}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:60px;}
+.wc{position:relative;overflow:hidden;cursor:pointer;height:480px;background:var(--blk);}
+.wc img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%) contrast(1.1);transition:all 0.6s cubic-bezier(0.2,0,0.2,1);}
+.wc:hover img{transform:scale(1.04);filter:grayscale(40%) contrast(1.1);}
+.wi{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 50%);padding:36px;display:flex;flex-direction:column;justify-content:flex-end;}
+.wtag{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.wt{font-family:var(--display);font-size:24px;color:white;text-transform:uppercase;letter-spacing:1px;}
+.wm{font-size:12px;color:rgba(255,255,255,0.35);margin-top:6px;}
 
 /* ═══ PARTNERS ═══ */
-.partners{background:white;padding:56px 48px;text-align:center;border-top:1px solid rgba(0,0,0,0.04);}
-.partners-lab{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--grayL);margin-bottom:32px;}
-/* Replace with actual logo PNGs: /images/logo-marriott.png, etc. */
-.plogos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:44px;opacity:0.25;}
-.plogos span{font-family:var(--heading);font-size:18px;font-weight:600;letter-spacing:3px;color:var(--blk);text-transform:uppercase;}
+.partners{padding:60px 40px;text-align:center;background:var(--cream);border-top:1px solid rgba(0,0,0,0.04);}
+.p-lab{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--grayL);margin-bottom:28px;}
+.plogos{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;opacity:0.2;}
+.plogos span{font-family:var(--display);font-size:20px;color:var(--blk);text-transform:uppercase;letter-spacing:2px;}
 
 /* ═══ CTA ═══ */
-.cta{background:var(--red);padding:100px 48px;text-align:center;position:relative;overflow:hidden;}
-.cta::before{content:'BUILD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--heading);font-size:22vw;font-weight:700;color:rgba(255,255,255,0.03);pointer-events:none;text-transform:uppercase;}
-.cta h2{font-family:var(--heading);font-size:clamp(28px,3.8vw,52px);font-weight:700;color:white;margin-bottom:14px;position:relative;z-index:1;text-transform:uppercase;letter-spacing:1px;}
-.cta p{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:36px;position:relative;z-index:1;}
-.btn-w{background:white;color:var(--red);border:none;padding:14px 40px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;}
+.cta{background:var(--red);padding:120px 40px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'BUILD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:24vw;color:rgba(255,255,255,0.03);pointer-events:none;text-transform:uppercase;}
+.cta h2{font-family:var(--display);font-size:clamp(32px,5vw,64px);color:white;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1;}
+.cta p{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:40px;position:relative;z-index:1;}
+.btn-w{background:white;color:var(--red);border:none;padding:16px 44px;font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;}
 .btn-w:hover{background:var(--cream);transform:translateY(-1px);}
 
 /* ═══ FOOTER ═══ */
-footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;border-top:3px solid var(--red);}
-.fb{font-family:var(--heading);font-size:17px;font-weight:600;letter-spacing:3px;color:white;text-transform:uppercase;margin-bottom:10px;}
-.ftl{font-size:13px;color:rgba(255,255,255,0.2);line-height:1.75;max-width:260px;}
-.fc h4{font-family:var(--heading);font-size:12px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,0.15);text-transform:uppercase;margin-bottom:12px;}
-.fc a{display:block;font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}
+footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;border-top:3px solid var(--red);}
+.fb{font-family:var(--display);font-size:20px;color:white;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+.ftl{font-size:13px;color:rgba(255,255,255,0.18);line-height:1.75;max-width:260px;}
+.fc h4{font-family:var(--display);font-size:13px;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.fc a{display:block;font-size:13px;color:rgba(255,255,255,0.3);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}
 .fc a:hover{color:white;}
 .fbot{grid-column:1/-1;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;}
-.fbot span{font-size:10px;color:rgba(255,255,255,0.12);}
-.fso{display:flex;gap:8px;}
-.fso a{width:26px;height:26px;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,0.18);text-decoration:none;transition:all 0.2s;}
-.fso a:hover{border-color:var(--red);color:var(--red);}
+.fbot span{font-size:10px;color:rgba(255,255,255,0.1);}
 
-/* ═══ VIDEO MODAL ═══ */
-.video-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.video-modal.open{opacity:1;pointer-events:all;}
-.video-modal-close{position:absolute;top:24px;right:32px;font-size:36px;color:white;cursor:pointer;z-index:201;font-family:var(--body);line-height:1;transition:color 0.2s;}
-.video-modal-close:hover{color:var(--red);}
-.video-modal-inner{width:min(900px,90vw);aspect-ratio:16/9;}
-.video-modal-inner iframe{width:100%;height:100%;border:none;}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+/* ═══ ANIM ═══ */
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.hero-c{animation:fadeUp 0.8s ease 0.15s both;}
-.hero-peg{animation:fadeIn 1.1s ease 0.4s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:900px){
-  nav{padding:14px 20px;}.nl{display:none;}
-  .hero{padding:110px 24px 60px;}.hero-play,.hero-play-label{display:none;}.hero-peg{right:4%;height:40vh;opacity:0.35;}
-  .hero-video-wrap iframe{display:none;} /* Don't load YT on mobile — poster only */
-  .vstrip{grid-template-columns:1fr;gap:24px;padding:40px 24px;}
+  .nav{padding:14px 20px;}
+  .nav-r a{display:none;}.nav-cta{display:none;}
+  .hero{padding:80px 20px 60px;}
+  .hero-name{font-size:clamp(60px,16vw,120px);}
+  .red-prompts{gap:6px;}.red-prompt{font-size:11px;padding:6px 12px;}
+  .manifesto{padding:48px 20px;}
   .promise-grid{grid-template-columns:1fr;gap:40px;}
   .specs-g{grid-template-columns:1fr;}
-  .proof{grid-template-columns:repeat(2,1fr);}.proof-i:nth-child(5){grid-column:1/-1;}
-  .wg,.wg2{grid-template-columns:1fr;}
-  section,.specs,.promise{padding:80px 24px;}
-  footer{grid-template-columns:1fr 1fr;gap:20px;}
+  .proof{grid-template-columns:repeat(2,1fr);}
+  .proof-i:nth-child(5){grid-column:1/-1;}
+  .wg{grid-template-columns:1fr;}.wc{height:380px;}
+  .promise,.specs,.work{padding:80px 20px;}
+  .vstrip{grid-template-columns:1fr;gap:24px;padding:40px 20px;}
+  .sd{grid-template-columns:1fr;gap:12px;}
+  .sd-num{font-size:32px;}
+  .sd-cols{grid-template-columns:1fr;gap:20px;}
+  .specs-why-box{padding:28px 24px;}
+  footer{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
-<nav>
+<!-- NAV (mix-blend-mode: inverts over dark/light sections) -->
+<div class="nav">
   <div class="nav-logo">
-    <img class="peg-mark" src="images/peg-mark.png" alt="RedPeg">
+    <img src="images/peg-mark.png" alt="RedPeg">
     <span>RedPeg</span>
   </div>
-  <div class="nl">
+  <div class="nav-r">
     <a href="#specs">Specialties</a>
     <a href="#work">Work</a>
     <a href="#">About</a>
     <a href="#">Insights</a>
-    <button class="nav-cta">Start a Project</button>
-  </div>
-</nav>
-
-<!-- ═══════ HERO ═══════ -->
-<section class="hero">
-  <div class="hero-video-wrap">
-    <div class="hero-poster" id="hero-poster"></div>
-    <!-- YouTube background: RedPeg brand reel -->
-    <iframe 
-      id="hero-yt"
-      src="https://www.youtube.com/embed/5fJFRU5uM0w?autoplay=1&mute=1&loop=1&playlist=5fJFRU5uM0w&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=*"
-      allow="autoplay; encrypted-media"
-      loading="lazy"
-      title="RedPeg brand reel"
-    ></iframe>
-  </div>
-  <div class="hero-grad"></div>
-  <img class="hero-peg" src="images/peg-mark.png" alt="">
-  <div class="hero-play-label">Watch Reel</div>
-  <div class="hero-play" id="play-reel"><svg width="18" height="22" viewBox="0 0 18 22" fill="none"><path d="M2 1L16 11L2 21V1Z" fill="#D42030"/></svg></div>
-
-  <!-- Video modal -->
-  <div class="video-modal" id="video-modal">
-    <div class="video-modal-close" id="modal-close">&times;</div>
-    <div class="video-modal-inner">
-      <iframe id="modal-yt" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-    </div>
-  </div>
-  <div class="hero-c">
-    <div class="hero-k">Independent Production + Experience Agency</div>
-    <h1 class="hero-h">
-      AI <span class="red">THINKS</span> IT.<br>WE BUILD IT.
-      <span class="sub">You have the vision. The renders. The strategy.<br>We're the team that makes it physical.</span>
-    </h1>
-    <p class="hero-p">Your AI can generate the concept in an afternoon. Your internal team can write the brief. The part that still takes 30 years of expertise: turning all of it into a flawless, real-world experience.</p>
-    <div class="hero-btns">
-      <a href="#work" class="btn-r">See What We've Built</a>
-      <a href="#" class="btn-o">Talk to a Producer</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ VALUE STRIP ═══════ -->
-<div class="vstrip">
-  <div class="vs">
-    <div class="vs-num">01</div>
-    <div class="vs-text"><strong>You bring the vision.</strong> AI-generated renders, internal creative, agency concepts, napkin sketches. We've built from all of them.</div>
-  </div>
-  <div class="vs">
-    <div class="vs-num">02</div>
-    <div class="vs-text"><strong>We translate and engineer.</strong> CAD, fabrication specs, vendor packages, permits, staffing plans. The bridge between screen and street.</div>
-  </div>
-  <div class="vs">
-    <div class="vs-num">03</div>
-    <div class="vs-text"><strong>We build it. Flawlessly.</strong> 80,000-person festivals. Global loyalty programs across 87 properties. Multi-year leadership experiences. 30 years, zero missed curtain calls.</div>
+    <button class="nav-cta" onclick="document.querySelector('.red-input').focus();window.scrollTo({top:0,behavior:'smooth'})">Talk to Red</button>
   </div>
 </div>
 
-<!-- ═══════ THE PROMISE ═══════ -->
+<!-- ═══════════════════════════════ HERO: MEET RED ═══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-vid">
+    <iframe src="https://www.youtube.com/embed/5fJFRU5uM0w?autoplay=1&mute=1&loop=1&playlist=5fJFRU5uM0w&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" allow="autoplay" loading="lazy"></iframe>
+  </div>
+  <img class="hero-peg" src="images/peg-mark.png" alt="">
+  <div class="hero-content">
+    <div class="hero-greeting">Independent Production + Experience Agency</div>
+    <h1 class="hero-name">HI. I'M <span class="red">RED.</span></h1>
+    <p class="hero-sub">I know everything about RedPeg, what we build, who we build it for, and how we've done it for 30 years. Ask me anything.</p>
+
+    <div class="red-input-wrap">
+      <input class="red-input" id="red-input" type="text" placeholder="Ask me about what we build..." autocomplete="off">
+      <button class="red-send" id="red-send">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="red-prompts">
+      <button class="red-prompt" data-q="Can you handle a festival for 80,000 people?">80K-person festival?</button>
+      <button class="red-prompt" data-q="Tell me about your employee experience programs">Employee experiences</button>
+      <button class="red-prompt" data-q="How does Deep Cuts and your music partnerships work?">Music partnerships</button>
+      <button class="red-prompt" data-q="What makes RedPeg different from other experiential agencies?">Why RedPeg?</button>
+    </div>
+
+    <div class="red-response" id="red-response"></div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ MANIFESTO TICKER ═══════════════════════════════ -->
+<div class="manifesto">
+  <div class="man-track">
+    <div class="man-item">AI thinks it <span class="solid">•</span></div>
+    <div class="man-item"><span class="solid">We build it</span> <span class="solid">•</span></div>
+    <div class="man-item">You envision it <span class="solid">•</span></div>
+    <div class="man-item"><span class="solid">We build it</span> <span class="solid">•</span></div>
+    <div class="man-item">30 years <span class="solid">•</span></div>
+    <div class="man-item"><span class="solid">Zero missed curtain calls</span> <span class="solid">•</span></div>
+    <div class="man-item">AI thinks it <span class="solid">•</span></div>
+    <div class="man-item"><span class="solid">We build it</span> <span class="solid">•</span></div>
+    <div class="man-item">You envision it <span class="solid">•</span></div>
+    <div class="man-item"><span class="solid">We build it</span> <span class="solid">•</span></div>
+    <div class="man-item">30 years <span class="solid">•</span></div>
+    <div class="man-item"><span class="solid">Zero missed curtain calls</span> <span class="solid">•</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ VALUE STRIP ═══════════════════════════════ -->
+<div class="vstrip">
+  <div class="vs">
+    <div class="vs-num">01</div>
+    <div class="vs-text"><strong>Your AI is your greatest tool.</strong> AI-generated renders, internal creative, agency briefs, strategy decks built in an afternoon. The front end of experiential marketing has never been faster.</div>
+  </div>
+  <div class="vs">
+    <div class="vs-num">02</div>
+    <div class="vs-text"><strong>We finish what it starts.</strong> CAD translation, fabrication specs, vendor packages, permits, staffing plans, logistics. The bridge between the screen and the street.</div>
+  </div>
+  <div class="vs">
+    <div class="vs-num">03</div>
+    <div class="vs-text"><strong>The last mile is still human.</strong> 80,000-person festivals. Global programs across 87 properties. Multi-year leadership experiences. 30 years of flawless execution. That's the product.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PROMISE ═══════════════════════════════ -->
 <section class="promise">
   <div class="promise-grid">
     <div class="promise-text">
       <div class="stag">Why RedPeg</div>
-      <h2>YOUR VISION IS <span class="red">FURTHER ALONG</span> THAN EVER.<br>THE LAST MILE HASN'T CHANGED.</h2>
-      <p>Brands are moving faster. AI tools, internal creative teams, and consultancies are producing strategies, concepts, and visualizations at a pace that didn't exist two years ago.</p>
-      <p><strong>The back end hasn't changed.</strong> Someone still has to translate that concept into engineering drawings. Negotiate the venue. Manage the fabrication. Hire and train the crew. Secure the permits. And make sure the experience is flawless when the doors open.</p>
-      <p>We've been that team for 30 years. The tools that get you to the brief got better. The team that takes you from brief to reality is still us.</p>
-      <p class="quiet">We're fluent in AI and creative strategy, too. When you need help upstream, we're there. But our product is the actualization.</p>
+      <h2 class="sec-h">YOUR AI IS <span style="color:var(--red)">POWERFUL.</span> THE LAST MILE HASN'T CHANGED.</h2>
+      <p>Your tools can generate the concept in an afternoon. Your internal team can write the brief. Consultancies can build the strategy deck. The front end of experiential marketing has been transformed.</p>
+      <p><strong>The back end is still ours.</strong> Someone has to translate that render into engineering drawings. Negotiate the venue. Manage the fabrication. Hire and train a 200-person crew. Secure permits in three jurisdictions. And make sure the experience is flawless when 80,000 people walk through the door.</p>
+      <p>The tools that get you to the brief got better. The team that takes you from brief to reality has been doing this for 30 years. We're that team.</p>
+      <p class="quiet">We're fluent in AI and creative strategy, too. When you need help upstream, we're there. But our product is the actualization, the last mile between vision and reality.</p>
     </div>
     <div class="promise-vis">
       <img class="promise-peg" src="images/peg-mark.png" alt="">
-      <img class="promise-img" src="images/promise-build.jpg" alt="Production engineering">
+      <img class="promise-img" src="images/promise-build.jpg" alt="Production build">
     </div>
   </div>
 </section>
 
-<!-- ═══════ THREE SPECIALTIES ═══════ -->
+<!-- ═══════════════════════════════ SPECIALTIES ═══════════════════════════════ -->
 <section class="specs" id="specs">
   <div class="stag">Our Specialties</div>
-  <h2 class="sh">Three disciplines. One standard.</h2>
-  <p class="ssub">Every engagement is execution-led. You bring the vision, content, and strategy. We translate, engineer, produce, and deliver.</p>
+  <h2 class="sec-h">Three disciplines.<br>One standard: flawless.</h2>
+  <p class="specs-why">Every engagement is execution-led. These are the three areas where our 30-year production infrastructure, our vendor networks, and our operational expertise create outcomes that other agencies can't match. Each one solves a different problem for a different buyer, but the through-line is the same: you bring the vision, we bring it to life.</p>
   <div class="specs-g">
 
     <div class="spec">
-      <img class="spec-img" src="images/spec-events.jpg" alt="Large-scale event production">
-      <div class="spec-content">
-        <div class="spec-num">Specialty 01</div>
+      <img class="spec-img" src="images/spec-events.jpg" alt="Large-scale events">
+      <div class="spec-paint"></div>
+      <div class="spec-ov">
+        <div class="spec-num">01</div>
         <div class="spec-t">Large-Scale Events</div>
-        <p class="spec-d">Festivals, sponsorship activations, mobile tours, pop-ups, trade shows. End-to-end production from concept translation through on-site execution. Any scale, any market.</p>
-        <p class="spec-proof">80K-person gaming festivals / Multi-country sponsorship activations / F1 fan zones and VIP experiences / Mobile tours across 15+ cities</p>
+        <p class="spec-d">Festivals, sponsorship activations, mobile tours, pop-ups, trade shows. End-to-end production from concept translation through on-site execution. Any scale, any market, any timeline.</p>
         <div class="spec-cl">Marriott / Santander / Meta / VA Lottery / Toei</div>
-        <a href="#" class="spec-link">See the work &rarr;</a>
       </div>
     </div>
-
     <div class="spec">
-      <img class="spec-img" src="images/spec-b2e.jpg" alt="Employee experience production">
-      <div class="spec-content">
-        <div class="spec-num">Specialty 02</div>
+      <img class="spec-img" src="images/spec-b2e.jpg" alt="Employee experiences">
+      <div class="spec-paint"></div>
+      <div class="spec-ov">
+        <div class="spec-num">02</div>
         <div class="spec-t">Employee Experiences</div>
-        <p class="spec-d">Internal conferences, leadership development, culture events. You provide the content and vision. We build the environment, manage the production, and run the show.</p>
-        <p class="spec-proof">3-year Fortune 100 leadership program, 10-12 cohorts / 15 annual employee picnics / Military convention activations / Corporate appreciation events</p>
+        <p class="spec-d">Internal conferences, leadership development, culture events. You bring the content, the curriculum, the theme. We build the environment, manage production, and run every detail, from setup to teardown, cohort after cohort.</p>
         <div class="spec-cl">USAA / In-N-Out / Fannie Mae / Obsidian</div>
-        <a href="#" class="spec-link">See the work &rarr;</a>
       </div>
     </div>
-
     <div class="spec">
-      <img class="spec-img" src="images/spec-music.jpg" alt="Music partnership production">
-      <div class="spec-content">
-        <div class="spec-num">Specialty 03</div>
+      <img class="spec-img" src="images/spec-music.jpg" alt="Music partnerships">
+      <div class="spec-paint"></div>
+      <div class="spec-ov">
+        <div class="spec-num">03</div>
         <div class="spec-t">Music Partnerships</div>
-        <p class="spec-d">Artist tour VIP experiences, festival brand activations, music programming. Deep Cuts Entertainment, our in-house subsidiary, brings 60+ years of combined music industry expertise.</p>
-        <p class="spec-proof">87-property global loyalty x artist program / VIP tour experiences across dozens of cities / Active 2026 summer tours in production now</p>
-        <div class="spec-cl">Marriott Bonvoy / Yuengling / Deep Cuts Entertainment</div>
-        <a href="#" class="spec-link">See the work &rarr;</a>
+        <p class="spec-d">Artist tour VIP experiences, festival brand activations, music programming. Deep Cuts Entertainment, our in-house subsidiary, brings 60+ years of combined industry expertise. Talent-agnostic. Brand-first.</p>
+        <div class="spec-cl">Marriott Bonvoy / Yuengling / Deep Cuts</div>
       </div>
     </div>
 
   </div>
+
+  <!-- Expanded detail below the cards -->
+  <div class="specs-detail">
+    <div class="sd">
+      <div class="sd-num">01</div>
+      <div class="sd-content">
+        <h3>Large-Scale Events</h3>
+        <div class="sd-cols">
+          <div>
+            <div class="sd-label">What you bring</div>
+            <p>The brief, the concept, the brand guidelines, the activation goals. Sometimes an AI-generated render. Sometimes a PowerPoint. Sometimes a phone call.</p>
+          </div>
+          <div>
+            <div class="sd-label">What we deliver</div>
+            <p>CAD translation, fabrication management, venue procurement and permitting, vendor packages, staffing and labor, logistics and shipping, load-in/load-out, on-site production management, and post-event reporting.</p>
+          </div>
+        </div>
+        <div class="sd-proof">80K-person gaming festivals / Multi-country sponsorship activations / F1 fan zones and VIP villas / 15-city mobile tours / Trade show builds at scale</div>
+      </div>
+    </div>
+    <div class="sd">
+      <div class="sd-num">02</div>
+      <div class="sd-content">
+        <h3>Employee Experiences</h3>
+        <div class="sd-cols">
+          <div>
+            <div class="sd-label">What you bring</div>
+            <p>Curriculum, content, speakers, brand themes, attendance numbers, objectives. The strategic framework is yours. The experience design, the build, and the execution are ours.</p>
+          </div>
+          <div>
+            <div class="sd-label">What we deliver</div>
+            <p>Environment design and fabrication, AV and technology, setup and teardown (10-12 cohorts for one client's leadership program), digital experience builds, staffing, venue management, registration systems, on-site production.</p>
+          </div>
+        </div>
+        <div class="sd-proof">3-year Fortune 100 leadership program / 10-12 cohort room setup + teardown per year / 15 annual employee picnics / Military convention activations / Corporate appreciation events</div>
+      </div>
+    </div>
+    <div class="sd">
+      <div class="sd-num">03</div>
+      <div class="sd-content">
+        <h3>Music Partnerships</h3>
+        <div class="sd-cols">
+          <div>
+            <div class="sd-label">What you bring</div>
+            <p>Brand objectives, partnership goals, budget parameters. You want to drive loyalty enrollment through music. You want to launch a product through an artist partnership. You want VIP tour experiences for your best customers.</p>
+          </div>
+          <div>
+            <div class="sd-label">What we deliver</div>
+            <p>Artist matching and negotiation (talent-agnostic, brand-first), VIP experience design and production, on-tour activation management, brand integration across venues, partnership ROI measurement. Full production from design through on-site execution across dozens of tour dates.</p>
+          </div>
+        </div>
+        <div class="sd-proof">87-property global loyalty x Taylor Swift program / Imagine Dragons VIP tour / Active 2026 tours: Lindsey Stirling, Kesha, Dierks Bentley / Beyoncé Cowboy Carter Tour / Marriott Culinary music programming</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-why-box">
+    <div class="stag">Why these three</div>
+    <p>These aren't arbitrary service categories. They're the three areas where the gap between vision and reality is widest, where execution complexity is highest, and where our production infrastructure creates the most value. Large-scale events require logistics that scale. Employee experiences require repeatable precision. Music partnerships require industry relationships and tour-grade production capability. In all three, AI accelerates the concept. Humans close the last mile. We're the humans.</p>
+  </div>
 </section>
 
-<!-- ═══════ PROOF ═══════ -->
+<!-- ═══════════════════════════════ PROOF ═══════════════════════════════ -->
 <div class="proof">
   <div class="proof-i"><div class="proof-n">30</div><div class="proof-l">Years Independent</div></div>
   <div class="proof-i"><div class="proof-n">80K</div><div class="proof-l">Largest Single Event</div></div>
@@ -333,108 +436,132 @@ footer{background:var(--blk);padding:52px 48px 28px;display:grid;grid-template-c
   <div class="proof-i"><div class="proof-n">3B+</div><div class="proof-l">Total Impressions</div></div>
 </div>
 
-<!-- ═══════ WORK ═══════ -->
+<!-- ═══════════════════════════════ WORK ═══════════════════════════════ -->
 <section class="work" id="work">
   <div class="stag">Selected Work</div>
-  <h2 class="sh">They envisioned it. We built it.</h2>
+  <h2 class="sec-h">They brought the vision.<br>We brought it to life.</h2>
   <div class="wg">
-    <!-- IMAGE: /images/work-marriott-swift.jpg — concert VIP, backstage, fan experience -->
-    <div class="wc"><img src="images/work-marriott-swift.jpg" alt="Music loyalty activation"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ new enrollments / 3B+ impressions</div></div></div>
-    <!-- IMAGE: /images/work-gaming-fest.jpg — large gaming event, crowd, outdoor festival -->
-    <div class="wc"><img src="images/work-gaming-fest.jpg" alt="Gaming festival production"><div class="wi"><div class="wtag">Large-Scale Event / Gaming</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero operational failures</div></div></div>
-  </div>
-  <div class="wg2">
-    <!-- IMAGE: /images/work-b2e-leadership.jpg — corporate stage, branded environment, keynote -->
-    <div class="wc"><img src="images/work-b2e-leadership.jpg" alt="Corporate leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year engagement / 10-12 cohorts / Full environment build + teardown each session</div></div></div>
-    <!-- IMAGE: /images/work-f1-activation.jpg — motorsport, experiential, branded activation -->
-    <div class="wc"><img src="images/work-f1-activation.jpg" alt="F1 sponsorship activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
+    <div class="wc"><img src="images/work-marriott-swift.jpg" alt="Marriott x Taylor Swift"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ enrollments / 3B+ impressions</div></div></div>
+    <div class="wc"><img src="images/work-gaming-fest.jpg" alt="Gaming festival"><div class="wi"><div class="wtag">Large-Scale Event</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero failures</div></div></div>
+    <div class="wc"><img src="images/work-b2e-leadership.jpg" alt="Leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year / 10-12 cohorts / Full environment build + teardown</div></div></div>
+    <div class="wc"><img src="images/work-f1-activation.jpg" alt="F1 activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
   </div>
 </section>
 
-<!-- ═══════ PARTNERS ═══════ -->
+<!-- ═══════════════════════════════ PARTNERS ═══════════════════════════════ -->
 <div class="partners">
-  <div class="partners-lab">Trusted by brands that demand flawless execution</div>
+  <div class="p-lab">Trusted by brands that demand flawless execution</div>
   <div class="plogos">
-    <!-- NOTE: No Scopely or Nike per MSA. Replace spans with /images/logo-[client].png -->
-    <span>Marriott Bonvoy</span>
-    <span>Coca-Cola</span>
-    <span>USAA</span>
-    <span>Santander</span>
-    <span>Meta</span>
-    <span>In-N-Out</span>
-    <span>Capital One</span>
-    <span>Toei</span>
+    <span>Marriott Bonvoy</span><span>Coca-Cola</span><span>USAA</span><span>Santander</span><span>Meta</span><span>In-N-Out</span><span>Capital One</span><span>Toei</span>
   </div>
 </div>
 
-<!-- ═══════ CTA ═══════ -->
+<!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
 <section class="cta">
   <h2>You bring the vision.<br>We bring the hard hats.</h2>
   <p>30 years of turning ideas into experiences. Let's build yours.</p>
-  <button class="btn-w">Start a Conversation</button>
+  <button class="btn-w" onclick="document.querySelector('.red-input').focus();window.scrollTo({top:0,behavior:'smooth'})">Talk to Red</button>
 </section>
 
-<!-- ═══════ FOOTER ═══════ -->
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
 <footer>
-  <div>
-    <div class="fb">RedPeg</div>
-    <p class="ftl">Independent production and experience agency. Fiercely independent since 1995.</p>
-  </div>
-  <div class="fc">
-    <h4>Specialties</h4>
-    <a href="#">Large-Scale Events</a>
-    <a href="#">Employee Experiences</a>
-    <a href="#">Music Partnerships</a>
-    <a href="#">All Work</a>
-  </div>
-  <div class="fc">
-    <h4>Company</h4>
-    <a href="#">About</a>
-    <a href="#">Team</a>
-    <a href="#">Insights</a>
-    <a href="#">Careers</a>
-  </div>
-  <div class="fc">
-    <h4>Find Us</h4>
-    <a href="#">727 N Washington St</a>
-    <a href="#">Alexandria, VA 22314</a>
-    <a href="#">703-519-9000</a>
-    <a href="#">hello@redpeg.com</a>
-  </div>
-  <div class="fbot">
-    <span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span>
-    <div class="fso"><a href="#">Li</a><a href="#">Ig</a><a href="#">X</a></div>
-  </div>
+  <div><div class="fb">RedPeg</div><p class="ftl">Independent production and experience agency. Fiercely independent since 1995.</p></div>
+  <div class="fc"><h4>Specialties</h4><a href="#">Large-Scale Events</a><a href="#">Employee Experiences</a><a href="#">Music Partnerships</a><a href="#">All Work</a></div>
+  <div class="fc"><h4>Company</h4><a href="#">About</a><a href="#">Team</a><a href="#">Insights</a><a href="#">Careers</a></div>
+  <div class="fc"><h4>Find Us</h4><a href="#">727 N Washington St</a><a href="#">Alexandria, VA 22314</a><a href="#">703-519-9000</a></div>
+  <div class="fbot"><span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span></div>
 </footer>
 
+<!-- ═══════════════════════════════ RED AI — ANTHROPIC API ═══════════════════════════════ -->
 <script>
-// Video modal: play reel in overlay
-const playBtn = document.getElementById('play-reel');
-const modal = document.getElementById('video-modal');
-const modalClose = document.getElementById('modal-close');
-const modalYt = document.getElementById('modal-yt');
-const YT_URL = 'https://www.youtube.com/embed/5fJFRU5uM0w?autoplay=1&rel=0&modestbranding=1';
+const SYSTEM_PROMPT = `You are Red, RedPeg Marketing's AI assistant on their website. You speak with confidence, warmth, and directness. You know everything about RedPeg.
 
-if(playBtn) playBtn.addEventListener('click', () => {
-  modalYt.src = YT_URL;
-  modal.classList.add('open');
-});
-if(modalClose) modalClose.addEventListener('click', () => {
-  modal.classList.remove('open');
-  modalYt.src = '';
-});
-modal.addEventListener('click', (e) => {
-  if(e.target === modal){ modal.classList.remove('open'); modalYt.src = ''; }
-});
-document.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape'){ modal.classList.remove('open'); modalYt.src = ''; }
-});
+ABOUT REDPEG:
+RedPeg is a 30-year-old independent production and experience agency headquartered in Alexandria, VA. The positioning: "AI Thinks It. We Build It." — clients bring the vision (AI-generated renders, internal creative, agency concepts), RedPeg translates it into physical reality through executional excellence.
 
-// Fade poster once bg iframe has had time to load
-setTimeout(() => {
-  const poster = document.getElementById('hero-poster');
-  if(poster) poster.classList.add('hidden');
-}, 3000);
+THREE SPECIALTIES:
+1. Large-Scale Events — Festivals, sponsorship activations, mobile tours, pop-ups, trade shows. End-to-end production. Any scale. Proof: 80,000-person gaming festival (Rose Bowl + Chicago, multi-city). Marriott Bonvoy Snow League (multi-country). Santander/OpenBank F1 Miami. Meta COA Suite. Virginia Lottery programs.
+2. Employee Experiences (B2E) — Internal conferences, leadership development, culture events. Client brings content, RedPeg builds environment and runs production. Proof: Fortune 100 leadership program (3 years, 10-12 cohorts, full setup/teardown each). 15 annual employee picnics for major QSR brand. Military convention activations for USAA. Corporate appreciation events.
+3. Music Partnerships — Deep Cuts Entertainment (in-house subsidiary, 60+ years combined music industry expertise). Artist tour VIP experiences, festival brand activations, music programming. Talent-agnostic, brand-first. Proof: Marriott Bonvoy x Taylor Swift (87 properties, 1.6M sweepstakes entries, 500K+ new enrollments, 3B+ impressions). Yuengling x Imagine Dragons. Active 2026 tours: Lindsey Stirling, Kesha, Dierks Bentley. Beyoncé Cowboy Carter Tour.
+
+KEY FACTS:
+- 37 employees, lean senior team where everyone wears multiple hats
+- Founded 1995, fiercely independent, no holding company
+- Current clients include: Marriott, USAA, Santander/OpenBank, In-N-Out, Meta, Coca-Cola, Capital One, Toei, Virginia Lottery
+- AI fluent: uses generative tools for concepting, visualization, planning. But the product is the physical execution.
+- Member of the Dawn network of independent agencies
+
+VOICE: Confident, direct, warm. Like a knowledgeable producer who loves what they do. Use specific numbers and proof points. Keep responses concise (2-4 paragraphs max). No corporate jargon. When appropriate, suggest they talk to a real producer for specifics.
+
+IMPORTANT: Do not mention Scopely or Nike by name — refer to them as "a major gaming publisher" or "a Fortune 100 athletic brand" due to MSA restrictions.`;
+
+const input = document.getElementById('red-input');
+const sendBtn = document.getElementById('red-send');
+const responseArea = document.getElementById('red-response');
+const prompts = document.querySelectorAll('.red-prompt');
+let conversationHistory = [];
+
+function addMessage(text, isUser = false) {
+  const div = document.createElement('div');
+  div.className = isUser ? 'red-msg user-msg' : 'red-msg';
+  div.innerHTML = `<div class="label">${isUser ? 'You' : 'Red'}</div><p>${text}</p>`;
+  responseArea.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'red-msg';
+  div.id = 'typing';
+  div.innerHTML = '<div class="label">Red</div><div class="typing"><span></span><span></span><span></span></div>';
+  responseArea.appendChild(div);
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function askRed(question) {
+  if (!question.trim()) return;
+  addMessage(question, true);
+  input.value = '';
+  showTyping();
+
+  conversationHistory.push({ role: 'user', content: question });
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 600,
+        system: SYSTEM_PROMPT,
+        messages: conversationHistory,
+      }),
+    });
+    const data = await res.json();
+    const reply = data.content?.map(c => c.text || '').join('') || "I'm having trouble connecting right now. Reach us at hello@redpeg.com and a producer will get back to you.";
+    conversationHistory.push({ role: 'assistant', content: reply });
+    removeTyping();
+    // Convert **bold** to <strong> and newlines to <br>
+    const formatted = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    addMessage(formatted);
+  } catch (e) {
+    removeTyping();
+    addMessage("I'm having trouble connecting right now. Reach us directly at <strong>hello@redpeg.com</strong> — a real producer will get back to you.");
+  }
+}
+
+sendBtn.addEventListener('click', () => askRed(input.value));
+input.addEventListener('keydown', (e) => { if (e.key === 'Enter') askRed(input.value); });
+prompts.forEach(p => p.addEventListener('click', () => {
+  const q = p.getAttribute('data-q');
+  input.value = q;
+  askRed(q);
+}));
 </script>
+
 </body>
 </html>
