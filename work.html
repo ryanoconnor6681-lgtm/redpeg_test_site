@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedPeg — Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F3EDE5;--white:#FAFAF7;--red:#D42030;--red-d:#A8182A;--blk:#0C0C0C;--text:#1A1A1A;--gray:#6B6560;--grayL:#9B9590;--display:'Anton',sans-serif;--body:'Outfit',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-x:hidden;}::selection{background:var(--red);color:white;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(243,237,229,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{height:32px;}.nav-logo span{font-family:var(--display);font-size:22px;color:var(--blk);text-transform:uppercase;letter-spacing:2px;}
+.nl{display:flex;gap:24px;align-items:center;}
+.nl a{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}.nl a:hover,.nl a.active{color:var(--red);}
+.nav-cta{background:var(--red);color:white;border:none;padding:8px 20px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background 0.2s;}.nav-cta:hover{background:var(--red-d);}
+
+/* HERO */
+.page-hero{padding:140px 40px 80px;background:var(--cream);}
+.stag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.page-h{font-family:var(--display);font-size:clamp(48px,8vw,100px);text-transform:uppercase;line-height:0.9;color:var(--blk);margin-bottom:20px;}
+.page-h .red{color:var(--red);}
+.page-sub{font-size:16px;line-height:1.8;color:var(--gray);max-width:560px;}
+
+/* FILTERS */
+.filters{padding:0 40px 48px;display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{padding:8px 20px;border:1px solid rgba(0,0,0,0.08);background:transparent;font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray);cursor:pointer;transition:all 0.2s;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--red);color:var(--red);background:rgba(212,32,48,0.04);}
+
+/* WORK GRID */
+.wgrid{padding:0 40px 120px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.wcard{position:relative;overflow:hidden;cursor:pointer;height:440px;background:var(--blk);text-decoration:none;}
+.wcard img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%) contrast(1.1);transition:all 0.6s cubic-bezier(0.2,0,0.2,1);}
+.wcard:hover img{transform:scale(1.04);filter:grayscale(40%) contrast(1.1);}
+.wcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 50%);padding:32px;display:flex;flex-direction:column;justify-content:flex-end;}
+.wcard-tag{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.wcard-t{font-family:var(--display);font-size:22px;color:white;text-transform:uppercase;letter-spacing:1px;}
+.wcard-m{font-size:12px;color:rgba(255,255,255,0.35);margin-top:5px;}
+.wcard-client{font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;}
+
+/* CTA */
+.cta{background:var(--red);padding:100px 40px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'BUILD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:24vw;color:rgba(255,255,255,0.03);pointer-events:none;text-transform:uppercase;}
+.cta h2{font-family:var(--display);font-size:clamp(28px,4vw,52px);color:white;text-transform:uppercase;margin-bottom:14px;position:relative;z-index:1;}
+.cta p{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:36px;position:relative;z-index:1;}
+.btn-w{background:white;color:var(--red);border:none;padding:14px 40px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;text-decoration:none;display:inline-block;}.btn-w:hover{background:var(--cream);transform:translateY(-1px);}
+
+/* FOOTER */
+footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;border-top:3px solid var(--red);}
+.fb{font-family:var(--display);font-size:20px;color:white;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+.ftl{font-size:13px;color:rgba(255,255,255,0.18);line-height:1.75;max-width:260px;}
+.fc h4{font-family:var(--display);font-size:13px;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+.fc a{display:block;font-size:13px;color:rgba(255,255,255,0.3);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}.fc a:hover{color:white;}
+.fbot{grid-column:1/-1;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;}
+.fbot span{font-size:10px;color:rgba(255,255,255,0.1);}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}.nl a:not(.nav-cta){display:none;}
+  .page-hero{padding:110px 20px 60px;}.filters{padding:0 20px 32px;}
+  .wgrid{grid-template-columns:1fr;padding:0 20px 80px;}.wcard{height:340px;}
+  footer{grid-template-columns:1fr 1fr;padding:40px 20px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><img src="images/peg-mark.png" alt="RedPeg"><span>RedPeg</span></a>
+  <div class="nl">
+    <a href="index.html#specs">Specialties</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="team.html">About</a>
+    <a href="insights.html">Insights</a>
+    <a class="nav-cta" href="index.html">Talk to Red</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="stag">Selected Work</div>
+  <h1 class="page-h">THEY BROUGHT THE <span class="red">VISION.</span><br>WE BROUGHT IT TO LIFE.</h1>
+  <p class="page-sub">30 years of turning briefs, renders, and napkin sketches into flawless real-world experiences. Select work shown with client permission.</p>
+</section>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="events">Large-Scale Events</button>
+  <button class="filter-btn" data-filter="b2e">Employee Experiences</button>
+  <button class="filter-btn" data-filter="music">Music Partnerships</button>
+</div>
+
+<div class="wgrid" id="work-grid">
+  <a class="wcard" data-cat="music" href="#"><img src="images/work-marriott-swift.jpg" alt="Taylor Swift"><div class="wcard-ov"><div class="wcard-tag">Music Partnership / Loyalty</div><div class="wcard-t">Moments with Taylor Swift</div><div class="wcard-m">87 properties / 1.6M entries / 500K+ enrollments / 3B+ impressions</div><div class="wcard-client">Marriott Bonvoy</div></div></a>
+  <a class="wcard" data-cat="events" href="#"><img src="images/work-gaming-fest.jpg" alt="Gaming festival"><div class="wcard-ov"><div class="wcard-tag">Large-Scale Event</div><div class="wcard-t">80,000-Person Gaming Festival</div><div class="wcard-m">Multi-city / Full production + logistics / Zero failures</div></div></a>
+  <a class="wcard" data-cat="events" href="#"><img src="images/work-f1-activation.jpg" alt="F1 Miami"><div class="wcard-ov"><div class="wcard-tag">Sponsorship Activation</div><div class="wcard-t">Santander / OpenBank F1 Miami</div><div class="wcard-m">Fan Zone + VIP Villa + Brand integrations</div><div class="wcard-client">Santander</div></div></a>
+  <a class="wcard" data-cat="b2e" href="#"><img src="images/work-b2e-leadership.jpg" alt="Leadership program"><div class="wcard-ov"><div class="wcard-tag">Employee Experience</div><div class="wcard-t">Fortune 100 Leadership Program</div><div class="wcard-m">3-year / 10-12 cohorts / Full environment build + teardown</div></div></a>
+  <a class="wcard" data-cat="events" href="#"><img src="images/spec-events.jpg" alt="Snow League"><div class="wcard-ov"><div class="wcard-tag">Sponsorship Activation</div><div class="wcard-t">Marriott Bonvoy Snow League</div><div class="wcard-m">Multi-country / Athlete + hospitality integration</div><div class="wcard-client">Marriott Bonvoy</div></div></a>
+  <a class="wcard" data-cat="music" href="#"><img src="images/spec-music.jpg" alt="Imagine Dragons"><div class="wcard-ov"><div class="wcard-tag">Music Partnership</div><div class="wcard-t">Flight x Imagine Dragons</div><div class="wcard-m">600K+ impressions / 15M packaging placements</div><div class="wcard-client">Yuengling</div></div></a>
+  <a class="wcard" data-cat="b2e" href="#"><img src="images/spec-b2e.jpg" alt="Employee picnics"><div class="wcard-ov"><div class="wcard-tag">Employee Experience</div><div class="wcard-t">Annual Employee Picnics</div><div class="wcard-m">15 annually / Full production across company locations</div></div></a>
+  <a class="wcard" data-cat="events" href="#"><img src="images/promise-build.jpg" alt="Comic-Con"><div class="wcard-ov"><div class="wcard-tag">Large-Scale Event</div><div class="wcard-t">Pac-Man at NYC Comic Con</div><div class="wcard-m">Immersive arcade + drone show</div><div class="wcard-client">Bandai Namco</div></div></a>
+  <a class="wcard" data-cat="music" href="#"><img src="images/work-marriott-swift.jpg" alt="Beyoncé"><div class="wcard-ov"><div class="wcard-tag">Music Partnership</div><div class="wcard-t">Beyoncé Cowboy Carter Tour</div><div class="wcard-m">VIP experience production / Marriott Bonvoy integration</div><div class="wcard-client">Marriott Bonvoy</div></div></a>
+</div>
+
+<section class="cta">
+  <h2>Have a vision that needs building?</h2>
+  <p>Let's talk about what you're trying to create.</p>
+  <a class="btn-w" href="index.html">Talk to Red</a>
+</section>
+
+<footer>
+  <div><div class="fb">RedPeg</div><p class="ftl">Independent production and experience agency. Fiercely independent since 1995.</p></div>
+  <div class="fc"><h4>Specialties</h4><a href="work.html#events">Large-Scale Events</a><a href="work.html#b2e">Employee Experiences</a><a href="work.html#music">Music Partnerships</a></div>
+  <div class="fc"><h4>Company</h4><a href="team.html">About</a><a href="insights.html">Insights</a><a href="#">Careers</a></div>
+  <div class="fc"><h4>Find Us</h4><a href="#">727 N Washington St</a><a href="#">Alexandria, VA 22314</a><a href="#">703-519-9000</a></div>
+  <div class="fbot"><span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span></div>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.wcard').forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

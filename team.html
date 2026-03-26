@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedPeg — About</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F3EDE5;--white:#FAFAF7;--red:#D42030;--red-d:#A8182A;--blk:#0C0C0C;--text:#1A1A1A;--gray:#6B6560;--grayL:#9B9590;--display:'Anton',sans-serif;--body:'Outfit',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-x:hidden;}::selection{background:var(--red);color:white;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(243,237,229,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}.nav-logo img{height:32px;}.nav-logo span{font-family:var(--display);font-size:22px;color:var(--blk);text-transform:uppercase;letter-spacing:2px;}
+.nl{display:flex;gap:24px;align-items:center;}
+.nl a{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}.nl a:hover,.nl a.active{color:var(--red);}
+.nav-cta{background:var(--red);color:white;border:none;padding:8px 20px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background 0.2s;}
+
+.stag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.page-h{font-family:var(--display);font-size:clamp(48px,8vw,100px);text-transform:uppercase;line-height:0.9;color:var(--blk);margin-bottom:20px;}
+.page-h .red{color:var(--red);}
+
+/* HERO */
+.page-hero{padding:140px 40px 80px;background:var(--cream);max-width:900px;}
+.page-sub{font-size:16px;line-height:1.8;color:var(--gray);max-width:600px;}
+
+/* VALUES */
+.values{padding:0 40px 100px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:1100px;}
+.val{padding-left:18px;border-left:3px solid var(--red);}
+.val h3{font-family:var(--display);font-size:22px;text-transform:uppercase;letter-spacing:1px;color:var(--blk);margin-bottom:10px;}
+.val p{font-size:14px;line-height:1.8;color:var(--gray);}
+
+/* LEADERSHIP */
+.leadership{padding:100px 40px;background:var(--white);}
+.leadership h2{font-family:var(--display);font-size:clamp(32px,4vw,56px);text-transform:uppercase;color:var(--blk);margin-bottom:56px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+.person{text-align:center;cursor:default;}
+.person-img{width:100%;aspect-ratio:1;object-fit:cover;filter:grayscale(100%) contrast(1.05);transition:filter 0.4s;margin-bottom:16px;background:var(--cream);}
+.person:hover .person-img{filter:grayscale(0%) contrast(1);}
+.person-name{font-family:var(--display);font-size:18px;text-transform:uppercase;letter-spacing:1px;color:var(--blk);margin-bottom:4px;}
+.person-title{font-size:12px;color:var(--grayL);line-height:1.5;}
+
+/* CULTURE */
+.culture{padding:100px 40px;background:var(--cream);}
+.culture-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1100px;align-items:center;}
+.culture-text h2{font-family:var(--display);font-size:clamp(28px,3.5vw,48px);text-transform:uppercase;color:var(--blk);margin-bottom:20px;line-height:1;}
+.culture-text p{font-size:15px;line-height:1.85;color:var(--gray);margin-bottom:16px;}
+.culture-img{width:100%;height:400px;object-fit:cover;filter:grayscale(100%) contrast(1.1);}
+
+/* HISTORY */
+.history{padding:100px 40px;background:var(--blk);}
+.history h2{font-family:var(--display);font-size:clamp(28px,3.5vw,48px);text-transform:uppercase;color:white;margin-bottom:24px;line-height:1;}
+.history p{font-size:15px;line-height:1.85;color:rgba(255,255,255,0.4);max-width:700px;margin-bottom:16px;}
+.history-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:60px;}
+.hs{text-align:center;}.hs-n{font-family:var(--display);font-size:48px;color:var(--red);}.hs-l{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:4px;}
+
+/* CTA */
+.cta{background:var(--red);padding:100px 40px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'BUILD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:24vw;color:rgba(255,255,255,0.03);pointer-events:none;text-transform:uppercase;}
+.cta h2{font-family:var(--display);font-size:clamp(28px,4vw,52px);color:white;text-transform:uppercase;margin-bottom:14px;position:relative;z-index:1;}.cta p{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:36px;position:relative;z-index:1;}
+.btn-w{background:white;color:var(--red);border:none;padding:14px 40px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;text-decoration:none;display:inline-block;}
+
+footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;border-top:3px solid var(--red);}
+.fb{font-family:var(--display);font-size:20px;color:white;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}.ftl{font-size:13px;color:rgba(255,255,255,0.18);line-height:1.75;max-width:260px;}
+.fc h4{font-family:var(--display);font-size:13px;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}.fc a{display:block;font-size:13px;color:rgba(255,255,255,0.3);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}.fc a:hover{color:white;}
+.fbot{grid-column:1/-1;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);font-size:10px;color:rgba(255,255,255,0.1);}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}.nl a:not(.nav-cta){display:none;}
+  .page-hero{padding:110px 20px 60px;}.values{grid-template-columns:1fr;padding:0 20px 60px;}
+  .team-grid{grid-template-columns:repeat(2,1fr);gap:20px;}.culture-grid{grid-template-columns:1fr;}
+  .history-stats{grid-template-columns:repeat(2,1fr);}
+  .leadership,.culture,.history{padding:60px 20px;}
+  footer{grid-template-columns:1fr 1fr;padding:40px 20px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><img src="images/peg-mark.png" alt="RedPeg"><span>RedPeg</span></a>
+  <div class="nl">
+    <a href="index.html#specs">Specialties</a>
+    <a href="work.html">Work</a>
+    <a href="team.html" class="active">About</a>
+    <a href="insights.html">Insights</a>
+    <a class="nav-cta" href="index.html">Talk to Red</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="stag">About RedPeg</div>
+  <h1 class="page-h">THE RIGHT <span class="red">PEOPLE.</span><br>NOT JUST MORE PEOPLE.</h1>
+  <p class="page-sub">We're built lean and sharp. 37 people who've been producing flawless experiences for brands that can't afford failure. Fiercely independent since 1995. No holding company. We answer to the work.</p>
+</section>
+
+<div class="values">
+  <div class="val">
+    <h3>Fiercely Independent</h3>
+    <p>We answer to ideas, not shareholders. Independence means we pick the work that fits, price it fairly, and deliver without layers of bureaucracy between us and the build.</p>
+  </div>
+  <div class="val">
+    <h3>Perpetual Pioneers</h3>
+    <p>AI-fluent. Production-obsessed. We've been adopting new tools and pushing production boundaries for three decades. The tools change. The standard doesn't.</p>
+  </div>
+  <div class="val">
+    <h3>Builders, Not Talkers</h3>
+    <p>We lead with what we've built, not what we think. Every case study starts with the outcome. Every conversation starts with what you need made real.</p>
+  </div>
+</div>
+
+<section class="leadership" id="leadership">
+  <h2>Leadership</h2>
+  <div class="team-grid">
+    <div class="person">
+      <!-- Replace with: images/team/brad-nierenberg.jpg -->
+      <div class="person-img" style="background:var(--cream-dark,#E6DFD5);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Brad Nierenberg</div>
+      <div class="person-title">CEO &amp; Founder</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">John Piester</div>
+      <div class="person-title">President</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Eric Hansen</div>
+      <div class="person-title">CFO &amp; COO</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Kristin Kidman</div>
+      <div class="person-title">SVP, Global Partnerships</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Kate Truscott</div>
+      <div class="person-title">VP, Global Partnerships</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Matt Sincaglia</div>
+      <div class="person-title">VP, Brand Strategy &amp; Analytics</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Sarah Perkins</div>
+      <div class="person-title">VP, Partner Services (Global)</div>
+    </div>
+    <div class="person">
+      <div class="person-img" style="background:#E6DFD5;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--grayL);">Photo</div>
+      <div class="person-name">Ryan O'Connor</div>
+      <div class="person-title">Senior Director, Creative</div>
+    </div>
+  </div>
+</section>
+
+<section class="culture">
+  <div class="culture-grid">
+    <div class="culture-text">
+      <div class="stag">Our Culture</div>
+      <h2>CULTURE IS THE PRODUCTION ENGINE.</h2>
+      <p>We build culture the same way we build experiences: with intention, care, and zero tolerance for mediocrity. Our people are the product. When they thrive, the work is flawless.</p>
+      <p>We empower our team to bring their full selves to every build, every client, every late-night load-in. That's not a slogan. It's why brands trust us with their hardest, most visible moments.</p>
+    </div>
+    <!-- Replace with: images/culture.jpg — team at event, backstage candid, build day -->
+    <img class="culture-img" src="images/hero-poster.jpg" alt="RedPeg culture">
+  </div>
+</section>
+
+<section class="history">
+  <h2>30 Years of Building.</h2>
+  <p>Founded in 1995 in Alexandria, Virginia. Survived the dot-com bust, the financial crisis, a global pandemic, and the loss of our largest client. Every time, we rebuilt. The machine got leaner, sharper, and more capable.</p>
+  <p>Today we're 37 people producing experiences for some of the most demanding brands on the planet. We're members of the Dawn network of independent agencies. And we're just getting started.</p>
+  <div class="history-stats">
+    <div class="hs"><div class="hs-n">1995</div><div class="hs-l">Founded</div></div>
+    <div class="hs"><div class="hs-n">30</div><div class="hs-l">Years Independent</div></div>
+    <div class="hs"><div class="hs-n">37</div><div class="hs-l">People, Zero Dead Weight</div></div>
+    <div class="hs"><div class="hs-n">3B+</div><div class="hs-l">Total Impressions</div></div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Want to meet the team<br>behind the build?</h2>
+  <p>Start with Red. We'll connect you with the right producer.</p>
+  <a class="btn-w" href="index.html">Talk to Red</a>
+</section>
+
+<footer>
+  <div><div class="fb">RedPeg</div><p class="ftl">Independent production and experience agency. Fiercely independent since 1995.</p></div>
+  <div class="fc"><h4>Specialties</h4><a href="work.html">Large-Scale Events</a><a href="work.html">Employee Experiences</a><a href="work.html">Music Partnerships</a></div>
+  <div class="fc"><h4>Company</h4><a href="team.html">About</a><a href="insights.html">Insights</a><a href="#">Careers</a></div>
+  <div class="fc"><h4>Find Us</h4><a href="#">727 N Washington St</a><a href="#">Alexandria, VA 22314</a><a href="#">703-519-9000</a></div>
+  <div class="fbot"><span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span></div>
+</footer>
+</body>
+</html>

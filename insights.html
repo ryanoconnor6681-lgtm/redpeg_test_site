@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedPeg — Insights</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F3EDE5;--white:#FAFAF7;--red:#D42030;--red-d:#A8182A;--blk:#0C0C0C;--text:#1A1A1A;--gray:#6B6560;--grayL:#9B9590;--display:'Anton',sans-serif;--body:'Outfit',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-x:hidden;}::selection{background:var(--red);color:white;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(243,237,229,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}.nav-logo img{height:32px;}.nav-logo span{font-family:var(--display);font-size:22px;color:var(--blk);text-transform:uppercase;letter-spacing:2px;}
+.nl{display:flex;gap:24px;align-items:center;}
+.nl a{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}.nl a:hover,.nl a.active{color:var(--red);}
+.nav-cta{background:var(--red);color:white;border:none;padding:8px 20px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background 0.2s;}
+
+.stag{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+.page-h{font-family:var(--display);font-size:clamp(48px,8vw,100px);text-transform:uppercase;line-height:0.9;color:var(--blk);margin-bottom:20px;}.page-h .red{color:var(--red);}
+
+/* HERO */
+.page-hero{padding:140px 40px 60px;background:var(--cream);}
+.page-sub{font-size:16px;line-height:1.8;color:var(--gray);max-width:600px;}
+
+/* CONTENT PILLARS */
+.pillars{padding:40px 40px 80px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.pillar{padding:20px;border:1px solid rgba(0,0,0,0.06);background:var(--white);cursor:pointer;transition:all 0.2s;}
+.pillar:hover,.pillar.active{border-color:var(--red);background:rgba(212,32,48,0.03);}
+.pillar-icon{font-size:24px;margin-bottom:10px;}
+.pillar-name{font-family:var(--display);font-size:16px;text-transform:uppercase;letter-spacing:1px;color:var(--blk);margin-bottom:6px;}
+.pillar-desc{font-size:12px;line-height:1.6;color:var(--grayL);}
+
+/* FEATURED */
+.featured{padding:0 40px 80px;}
+.featured-h{font-family:var(--display);font-size:28px;text-transform:uppercase;color:var(--blk);margin-bottom:32px;letter-spacing:1px;}
+.feat-grid{display:grid;grid-template-columns:1.4fr 0.6fr;gap:3px;}
+.feat-card{position:relative;overflow:hidden;background:var(--blk);text-decoration:none;display:block;min-height:400px;}
+.feat-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%) contrast(1.1);opacity:0.7;transition:all 0.5s;}
+.feat-card:hover img{transform:scale(1.03);opacity:0.5;}
+.feat-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,transparent 60%);padding:36px;display:flex;flex-direction:column;justify-content:flex-end;}
+.feat-pillar{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.feat-title{font-family:var(--display);font-size:24px;color:white;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.feat-meta{font-size:12px;color:rgba(255,255,255,0.35);}
+.feat-side{display:flex;flex-direction:column;gap:3px;}
+.feat-sm{position:relative;overflow:hidden;background:var(--blk);text-decoration:none;display:block;flex:1;min-height:197px;}
+.feat-sm img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(100%) contrast(1.1);opacity:0.6;transition:all 0.5s;}
+.feat-sm:hover img{opacity:0.4;}
+.feat-sm .feat-ov{background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 70%);}
+.feat-sm .feat-title{font-size:18px;}
+
+/* ARTICLE GRID */
+.articles{padding:80px 40px 120px;}
+.articles h2{font-family:var(--display);font-size:28px;text-transform:uppercase;color:var(--blk);margin-bottom:40px;letter-spacing:1px;}
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.art{text-decoration:none;color:var(--text);transition:transform 0.2s;}
+.art:hover{transform:translateY(-4px);}
+.art-img{width:100%;height:200px;object-fit:cover;filter:grayscale(100%) contrast(1.05);margin-bottom:16px;background:var(--cream);transition:filter 0.4s;}
+.art:hover .art-img{filter:grayscale(50%) contrast(1.05);}
+.art-pillar{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.art-title{font-family:var(--display);font-size:20px;text-transform:uppercase;letter-spacing:0.5px;color:var(--blk);margin-bottom:8px;line-height:1.1;}
+.art-excerpt{font-size:13px;line-height:1.7;color:var(--gray);margin-bottom:10px;}
+.art-meta{font-size:11px;color:var(--grayL);}
+.art-author{font-weight:600;color:var(--text);}
+
+/* CTA */
+.cta{background:var(--red);padding:100px 40px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'BUILD';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--display);font-size:24vw;color:rgba(255,255,255,0.03);pointer-events:none;text-transform:uppercase;}
+.cta h2{font-family:var(--display);font-size:clamp(28px,4vw,52px);color:white;text-transform:uppercase;margin-bottom:14px;position:relative;z-index:1;}.cta p{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:36px;position:relative;z-index:1;}
+.btn-w{background:white;color:var(--red);border:none;padding:14px 40px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;position:relative;z-index:1;text-decoration:none;display:inline-block;}
+
+footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;border-top:3px solid var(--red);}
+.fb{font-family:var(--display);font-size:20px;color:white;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}.ftl{font-size:13px;color:rgba(255,255,255,0.18);line-height:1.75;max-width:260px;}
+.fc h4{font-family:var(--display);font-size:13px;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}.fc a{display:block;font-size:13px;color:rgba(255,255,255,0.3);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}.fc a:hover{color:white;}
+.fbot{grid-column:1/-1;padding-top:20px;border-top:1px solid rgba(255,255,255,0.03);font-size:10px;color:rgba(255,255,255,0.1);}
+
+@media(max-width:900px){
+  nav{padding:14px 20px;}.nl a:not(.nav-cta){display:none;}
+  .page-hero{padding:110px 20px 40px;}.pillars{grid-template-columns:1fr 1fr;padding:20px 20px 60px;}
+  .feat-grid{grid-template-columns:1fr;}.feat-card{min-height:300px;}.feat-side{flex-direction:row;gap:3px;}.feat-sm{min-height:200px;}
+  .art-grid{grid-template-columns:1fr;}.articles{padding:60px 20px 80px;}
+  footer{grid-template-columns:1fr 1fr;padding:40px 20px 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html"><img src="images/peg-mark.png" alt="RedPeg"><span>RedPeg</span></a>
+  <div class="nl">
+    <a href="index.html#specs">Specialties</a>
+    <a href="work.html">Work</a>
+    <a href="team.html">About</a>
+    <a href="insights.html" class="active">Insights</a>
+    <a class="nav-cta" href="index.html">Talk to Red</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="stag">Insights</div>
+  <h1 class="page-h">FROM THE <span class="red">BUILD.</span></h1>
+  <p class="page-sub">Production stories, AI tools we're watching, gear we trust, and lessons from 30 years of making things real. Written by producers, not marketers.</p>
+</section>
+
+<!-- CONTENT PILLARS -->
+<div class="pillars">
+  <div class="pillar active">
+    <div class="pillar-icon">🔧</div>
+    <div class="pillar-name">From the Producers</div>
+    <div class="pillar-desc">Load-in day stories, production tips, gear lists, vendor relationships. The stuff you only learn on-site.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🤖</div>
+    <div class="pillar-name">AI + Execution</div>
+    <div class="pillar-desc">How AI tools are changing experiential concepting, CAD workflows, and what still requires a human hand.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">🎵</div>
+    <div class="pillar-name">Deep Cuts Sessions</div>
+    <div class="pillar-desc">Music partnership stories, artist tour production, and what brands get wrong about music activations.</div>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">📊</div>
+    <div class="pillar-name">The Numbers</div>
+    <div class="pillar-desc">Business results, case breakdowns, and what the metrics actually mean for the next activation.</div>
+  </div>
+</div>
+
+<!-- FEATURED ARTICLES -->
+<div class="featured">
+  <div class="featured-h">Featured</div>
+  <div class="feat-grid">
+    <a class="feat-card" href="#">
+      <img src="images/spec-events.jpg" alt="">
+      <div class="feat-ov">
+        <div class="feat-pillar">From the Producers</div>
+        <div class="feat-title">Load-In Day: What 80,000 People Never See</div>
+        <div class="feat-meta">The 72-hour production timeline behind our largest gaming festival. Every decision, every contingency, every 3am vendor call.</div>
+      </div>
+    </a>
+    <div class="feat-side">
+      <a class="feat-sm" href="#">
+        <img src="images/promise-build.jpg" alt="">
+        <div class="feat-ov">
+          <div class="feat-pillar">AI + Execution</div>
+          <div class="feat-title">We Used AI to Concept 40 Stage Designs in a Day. Here's the One We Built.</div>
+        </div>
+      </a>
+      <a class="feat-sm" href="#">
+        <img src="images/spec-music.jpg" alt="">
+        <div class="feat-ov">
+          <div class="feat-pillar">Deep Cuts Sessions</div>
+          <div class="feat-title">How We Matched Marriott with Taylor Swift. The Deal and the Build.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ALL ARTICLES -->
+<section class="articles">
+  <h2>All Articles</h2>
+  <div class="art-grid">
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">From the Producers</div>
+      <div class="art-title">What's in Our Kit: The Producer's Load-In Bag</div>
+      <p class="art-excerpt">Every RedPeg producer carries the same essentials. Here's the list, with links to every piece of gear we trust on-site.</p>
+      <div class="art-meta"><span class="art-author">Neil Carl</span> · Producer · 6 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">AI + Execution</div>
+      <div class="art-title">The 5 Things AI Still Can't Do on a Build Site</div>
+      <p class="art-excerpt">AI renders are beautiful. They also don't account for load-bearing walls, power requirements, or fire marshal egress plans. Here's what to watch for.</p>
+      <div class="art-meta"><span class="art-author">Ryan Onorato</span> · VP Innovation · 8 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">From the Producers</div>
+      <div class="art-title">The Permit Mistakes That Kill Activations</div>
+      <p class="art-excerpt">Every city has different rules. Every venue has different requirements. The 7 most common permitting failures we've seen (and how to avoid them).</p>
+      <div class="art-meta"><span class="art-author">Frank Blackmore</span> · Senior Producer · 5 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">AI + Execution</div>
+      <div class="art-title">From Midjourney to CAD: Translating AI Renders into Buildable Specs</div>
+      <p class="art-excerpt">We tested 4 AI render-to-CAD workflows. One actually saved time. The rest created more problems than they solved. Here's the breakdown.</p>
+      <div class="art-meta"><span class="art-author">Ryan Onorato</span> · VP Innovation · 10 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">Deep Cuts Sessions</div>
+      <div class="art-title">What Brands Get Wrong About Music Partnerships</div>
+      <p class="art-excerpt">It's never about the artist. It's about the audience overlap, the activation design, and the production that makes the VIP experience feel earned.</p>
+      <div class="art-meta"><span class="art-author">Kristin Kidman</span> · SVP, Partnerships · 7 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">The Numbers</div>
+      <div class="art-title">500K New Members from One Activation. Here's the Production Behind It.</div>
+      <p class="art-excerpt">The Marriott Bonvoy x Taylor Swift program wasn't just a music partnership. It was an 87-property logistics operation. The numbers and the build.</p>
+      <div class="art-meta"><span class="art-author">Matt Sincaglia</span> · VP Strategy · 6 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">From the Producers</div>
+      <div class="art-title">Crew Call: How We Staff a 200-Person Event in 72 Hours</div>
+      <p class="art-excerpt">The staffing network, the vetting process, the training timeline. What happens when a client says "we need 200 people on Friday."</p>
+      <div class="art-meta"><span class="art-author">Amanda Halabi</span> · Producer · 5 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">AI + Execution</div>
+      <div class="art-title">AI Tools We Actually Use (and the Ones We Dropped)</div>
+      <p class="art-excerpt">The honest list. What stayed in our workflow after the hype, what didn't survive a real production cycle, and what we're watching next.</p>
+      <div class="art-meta"><span class="art-author">Ryan Onorato</span> · VP Innovation · 8 min read</div>
+    </a>
+
+    <a class="art" href="#">
+      <div class="art-img" style="background:var(--cream);"></div>
+      <div class="art-pillar">From the Producers</div>
+      <div class="art-title">The Fabrication Vendor Relationship: What Agencies Get Wrong</div>
+      <p class="art-excerpt">Your fabricator is not a vendor. They're a creative partner with a welding torch. How we manage the relationship that makes or breaks every build.</p>
+      <div class="art-meta"><span class="art-author">Billy Freeman</span> · Producer · 6 min read</div>
+    </a>
+
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Have a question about<br>how we build?</h2>
+  <p>Red knows everything. Ask away.</p>
+  <a class="btn-w" href="index.html">Talk to Red</a>
+</section>
+
+<footer>
+  <div><div class="fb">RedPeg</div><p class="ftl">Independent production and experience agency. Fiercely independent since 1995.</p></div>
+  <div class="fc"><h4>Specialties</h4><a href="work.html">Large-Scale Events</a><a href="work.html">Employee Experiences</a><a href="work.html">Music Partnerships</a></div>
+  <div class="fc"><h4>Company</h4><a href="team.html">About</a><a href="insights.html">Insights</a><a href="#">Careers</a></div>
+  <div class="fc"><h4>Find Us</h4><a href="#">727 N Washington St</a><a href="#">Alexandria, VA 22314</a><a href="#">703-519-9000</a></div>
+  <div class="fbot"><span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span></div>
+</footer>
+</body>
+</html>
