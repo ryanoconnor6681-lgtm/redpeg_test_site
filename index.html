@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RedPeg — Meet Red</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 :root{
   --cream:#F3EDE5;--cream2:#EDE7DF;--white:#FAFAF7;
@@ -35,7 +37,7 @@ body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-
 /* Video bg very subtle */
 .hero-vid{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
 .hero-vid iframe{position:absolute;top:50%;left:50%;width:180vw;height:180vh;transform:translate(-50%,-50%);border:none;opacity:0.35;filter:grayscale(20%) brightness(0.75);}
-.hero-content{position:relative;z-index:2;max-width:800px;width:100%;background:rgba(12,12,12,0.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.08);border-top:2px solid rgba(212,32,48,0.6);padding:56px 48px 48px;box-shadow:0 0 80px rgba(0,0,0,0.4),0 -4px 30px rgba(212,32,48,0.1),inset 0 0 0 1px rgba(255,255,255,0.04);}
+.hero-content{position:relative;z-index:2;max-width:800px;width:100%;background:rgba(28,28,30,0.45);-webkit-backdrop-filter:saturate(180%) blur(40px);backdrop-filter:saturate(180%) blur(40px);border:1px solid rgba(255,255,255,0.12);border-top:1.5px solid rgba(255,255,255,0.25);border-left:1.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:56px 48px 48px;box-shadow:0 8px 60px rgba(0,0,0,0.35),0 0 0 0.5px rgba(255,255,255,0.06) inset;}
 .hero-greeting{font-family:var(--body);font-size:16px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:32px;opacity:0;animation:fadeIn 0.8s ease 0.3s forwards;}
 .hero-name{font-family:var(--display);font-size:clamp(80px,14vw,180px);color:white;text-transform:uppercase;line-height:0.85;margin-bottom:12px;opacity:0;animation:fadeIn 0.6s ease 0.5s forwards;}
 .hero-name .red{color:var(--red);}
@@ -47,13 +49,13 @@ body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-
   width:100%;padding:20px 60px 20px 24px;
   background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);
   color:white;font-family:var(--body);font-size:16px;font-weight:300;
-  outline:none;transition:all 0.3s;border-radius:0;
+  outline:none;transition:all 0.3s;border-radius:14px;
 }
 .red-input::placeholder{color:rgba(255,255,255,0.25);}
 .red-input:focus{border-color:var(--red);background:rgba(255,255,255,0.08);box-shadow:0 0 40px var(--red-glow);}
 .red-send{
   position:absolute;right:4px;top:50%;transform:translateY(-50%);
-  width:44px;height:44px;background:var(--red);border:none;
+  width:44px;height:44px;background:var(--red);border:none;border-radius:10px;
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:background 0.2s;
 }
@@ -62,7 +64,7 @@ body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-
 /* Suggested prompts */
 .red-prompts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px;opacity:0;animation:fadeIn 0.6s ease 1.3s forwards;}
 .red-prompt{
-  padding:8px 16px;border:1px solid rgba(255,255,255,0.08);
+  padding:8px 16px;border:1px solid rgba(255,255,255,0.08);border-radius:20px;
   font-size:12px;color:rgba(255,255,255,0.3);cursor:pointer;
   transition:all 0.2s;background:transparent;font-family:var(--body);
 }
@@ -73,7 +75,7 @@ body{background:var(--cream);color:var(--text);font-family:var(--body);overflow-
   max-width:620px;width:100%;margin:32px auto 0;min-height:0;
   text-align:left;overflow:hidden;transition:all 0.3s;
 }
-.red-msg{padding:20px 24px;background:rgba(255,255,255,0.04);border-left:3px solid var(--red);margin-bottom:12px;animation:fadeUp 0.4s ease both;}
+.red-msg{padding:20px 24px;background:rgba(255,255,255,0.04);border-left:3px solid var(--red);border-radius:12px;margin-bottom:12px;animation:fadeUp 0.4s ease both;}
 .red-msg p{font-size:14px;line-height:1.8;color:rgba(255,255,255,0.6);}
 .red-msg p strong{color:rgba(255,255,255,0.85);font-weight:600;}
 .red-msg .label{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
@@ -201,12 +203,18 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
+/* GSAP scroll-reveal initial states */
+.gs-reveal{opacity:0;transform:translateY(40px);}
+.gs-reveal-left{opacity:0;transform:translateX(-40px);}
+.gs-reveal-right{opacity:0;transform:translateX(40px);}
+.gs-reveal-scale{opacity:0;transform:scale(0.95);}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:900px){
   .nav{padding:14px 20px;}
   .nav-r a{display:none;}.nav-cta{display:none;}
   .hero{padding:80px 20px 60px;}
-  .hero-content{padding:36px 24px 32px;margin:0 8px;}
+  .hero-content{padding:36px 24px 32px;margin:0 12px;border-radius:16px;}
   .hero-name{font-size:clamp(60px,16vw,120px);}
   .red-prompts{gap:6px;}.red-prompt{font-size:11px;padding:6px 12px;}
   .manifesto{padding:48px 20px;}
@@ -296,15 +304,15 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
 
 <!-- ═══════════════════════════════ VALUE STRIP ═══════════════════════════════ -->
 <div class="vstrip">
-  <div class="vs">
+  <div class="vs gs-reveal-left">
     <div class="vs-num">01</div>
     <div class="vs-text"><strong>Your AI is your greatest tool.</strong> AI-generated renders, internal creative, agency briefs, strategy decks built in an afternoon. The front end of experiential marketing has never been faster.</div>
   </div>
-  <div class="vs">
+  <div class="vs gs-reveal-left">
     <div class="vs-num">02</div>
     <div class="vs-text"><strong>We finish what it starts.</strong> CAD translation, fabrication specs, vendor packages, permits, staffing plans, logistics. The bridge between the screen and the street.</div>
   </div>
-  <div class="vs">
+  <div class="vs gs-reveal-left">
     <div class="vs-num">03</div>
     <div class="vs-text"><strong>The last mile is still human.</strong> 80,000-person festivals. Global programs across 87 properties. Multi-year leadership experiences. 30 years of flawless execution. That's the product.</div>
   </div>
@@ -313,7 +321,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
 <!-- ═══════════════════════════════ PROMISE ═══════════════════════════════ -->
 <section class="promise">
   <div class="promise-grid">
-    <div class="promise-text">
+    <div class="promise-text gs-reveal-left">
       <div class="stag">Why RedPeg</div>
       <h2 class="sec-h">YOUR AI IS <span style="color:var(--red)">POWERFUL.</span> THE LAST MILE HASN'T CHANGED.</h2>
       <p>Your tools can generate the concept in an afternoon. Your internal team can write the brief. Consultancies can build the strategy deck. The front end of experiential marketing has been transformed.</p>
@@ -321,7 +329,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
       <p>The tools that get you to the brief got better. The team that takes you from brief to reality has been doing this for 30 years. We're that team.</p>
       <p class="quiet">We're fluent in AI and creative strategy, too. When you need help upstream, we're there. But our product is the actualization, the last mile between vision and reality.</p>
     </div>
-    <div class="promise-vis">
+    <div class="promise-vis gs-reveal-right">
       <img class="promise-peg" src="images/peg-mark.png" alt="">
       <img class="promise-img" src="images/promise-build.jpg" alt="Production build">
     </div>
@@ -335,7 +343,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
   <p class="specs-why">Every engagement is execution-led. These are the three areas where our 30-year production infrastructure, our vendor networks, and our operational expertise create outcomes that other agencies can't match. Each one solves a different problem for a different buyer, but the through-line is the same: you bring the vision, we bring it to life.</p>
   <div class="specs-g">
 
-    <div class="spec">
+    <div class="spec gs-reveal-scale">
       <img class="spec-img" src="images/spec-events.jpg" alt="Large-scale events">
       <div class="spec-paint"></div>
       <div class="spec-ov">
@@ -345,7 +353,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
         <div class="spec-cl">Marriott / Santander / Meta / VA Lottery / Toei</div>
       </div>
     </div>
-    <div class="spec">
+    <div class="spec gs-reveal-scale">
       <img class="spec-img" src="images/spec-b2e.jpg" alt="Employee experiences">
       <div class="spec-paint"></div>
       <div class="spec-ov">
@@ -355,7 +363,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
         <div class="spec-cl">USAA / In-N-Out / Fannie Mae / Obsidian</div>
       </div>
     </div>
-    <div class="spec">
+    <div class="spec gs-reveal-scale">
       <img class="spec-img" src="images/spec-music.jpg" alt="Music partnerships">
       <div class="spec-paint"></div>
       <div class="spec-ov">
@@ -370,7 +378,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
 
   <!-- Expanded detail below the cards -->
   <div class="specs-detail">
-    <div class="sd">
+    <div class="sd gs-reveal">
       <div class="sd-num">01</div>
       <div class="sd-content">
         <h3>Large-Scale Events</h3>
@@ -387,7 +395,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
         <div class="sd-proof">80K-person gaming festivals / Multi-country sponsorship activations / F1 fan zones and VIP villas / 15-city mobile tours / Trade show builds at scale</div>
       </div>
     </div>
-    <div class="sd">
+    <div class="sd gs-reveal">
       <div class="sd-num">02</div>
       <div class="sd-content">
         <h3>Employee Experiences</h3>
@@ -404,7 +412,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
         <div class="sd-proof">3-year Fortune 100 leadership program / 10-12 cohort room setup + teardown per year / 15 annual employee picnics / Military convention activations / Corporate appreciation events</div>
       </div>
     </div>
-    <div class="sd">
+    <div class="sd gs-reveal">
       <div class="sd-num">03</div>
       <div class="sd-content">
         <h3>Music Partnerships</h3>
@@ -423,7 +431,7 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
     </div>
   </div>
 
-  <div class="specs-why-box">
+  <div class="specs-why-box gs-reveal">
     <div class="stag">Why these three</div>
     <p>These aren't arbitrary service categories. They're the three areas where the gap between vision and reality is widest, where execution complexity is highest, and where our production infrastructure creates the most value. Large-scale events require logistics that scale. Employee experiences require repeatable precision. Music partnerships require industry relationships and tour-grade production capability. In all three, AI accelerates the concept. Humans close the last mile. We're the humans.</p>
   </div>
@@ -431,11 +439,11 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
 
 <!-- ═══════════════════════════════ PROOF ═══════════════════════════════ -->
 <div class="proof">
-  <div class="proof-i"><div class="proof-n">30</div><div class="proof-l">Years Independent</div></div>
-  <div class="proof-i"><div class="proof-n">80K</div><div class="proof-l">Largest Single Event</div></div>
-  <div class="proof-i"><div class="proof-n">87</div><div class="proof-l">Properties, One Program</div></div>
-  <div class="proof-i"><div class="proof-n">500K+</div><div class="proof-l">Enrollments, One Activation</div></div>
-  <div class="proof-i"><div class="proof-n">3B+</div><div class="proof-l">Total Impressions</div></div>
+  <div class="proof-i gs-reveal"><div class="proof-n">30</div><div class="proof-l">Years Independent</div></div>
+  <div class="proof-i gs-reveal"><div class="proof-n">80K</div><div class="proof-l">Largest Single Event</div></div>
+  <div class="proof-i gs-reveal"><div class="proof-n">87</div><div class="proof-l">Properties, One Program</div></div>
+  <div class="proof-i gs-reveal"><div class="proof-n">500K+</div><div class="proof-l">Enrollments, One Activation</div></div>
+  <div class="proof-i gs-reveal"><div class="proof-n">3B+</div><div class="proof-l">Total Impressions</div></div>
 </div>
 
 <!-- ═══════════════════════════════ WORK ═══════════════════════════════ -->
@@ -443,10 +451,10 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
   <div class="stag">Selected Work</div>
   <h2 class="sec-h">They brought the vision.<br>We brought it to life.</h2>
   <div class="wg">
-    <div class="wc"><img src="images/work-marriott-swift.jpg" alt="Marriott x Taylor Swift"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ enrollments / 3B+ impressions</div></div></div>
-    <div class="wc"><img src="images/work-gaming-fest.jpg" alt="Gaming festival"><div class="wi"><div class="wtag">Large-Scale Event</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero failures</div></div></div>
-    <div class="wc"><img src="images/work-b2d-leadership.jpg" alt="Leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year / 10-12 cohorts / Full environment build + teardown</div></div></div>
-    <div class="wc"><img src="images/work-f1-activation.jpg" alt="F1 activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
+    <div class="wc gs-reveal-scale"><img src="images/work-marriott-swift.jpg" alt="Marriott x Taylor Swift"><div class="wi"><div class="wtag">Music Partnership / Loyalty</div><div class="wt">Marriott Bonvoy x Taylor Swift</div><div class="wm">87 properties / 1.6M entries / 500K+ enrollments / 3B+ impressions</div></div></div>
+    <div class="wc gs-reveal-scale"><img src="images/work-gaming-fest.jpg" alt="Gaming festival"><div class="wi"><div class="wtag">Large-Scale Event</div><div class="wt">80,000-Person Gaming Festival</div><div class="wm">Multi-city / Full production + logistics / Zero failures</div></div></div>
+    <div class="wc gs-reveal-scale"><img src="images/work-b2d-leadership.jpg" alt="Leadership program"><div class="wi"><div class="wtag">Employee Experience</div><div class="wt">Fortune 100 Leadership Program</div><div class="wm">3-year / 10-12 cohorts / Full environment build + teardown</div></div></div>
+    <div class="wc gs-reveal-scale"><img src="images/work-f1-activation.jpg" alt="F1 activation"><div class="wi"><div class="wtag">Sponsorship Activation</div><div class="wt">Santander / OpenBank F1 Miami</div><div class="wm">Fan Zone + VIP Villa + Brand integrations</div></div></div>
   </div>
 </section>
 
@@ -473,6 +481,60 @@ footer{background:var(--blk);padding:52px 40px 28px;display:grid;grid-template-c
   <div class="fc"><h4>Find Us</h4><a href="#">727 N Washington St</a><a href="#">Alexandria, VA 22314</a><a href="#">703-519-9000</a></div>
   <div class="fbot"><span>&copy; 2026 RedPeg Marketing. Built in Alexandria, VA.</span></div>
 </footer>
+
+<!-- ═══ GSAP SCROLL ANIMATIONS ═══ -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Standard reveal (fade up)
+gsap.utils.toArray('.gs-reveal').forEach((el, i) => {
+  gsap.to(el, {
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+    delay: el.closest('.proof') ? i * 0.08 : 0
+  });
+});
+
+// Left slide-in
+gsap.utils.toArray('.gs-reveal-left').forEach(el => {
+  gsap.to(el, {
+    opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+  });
+});
+
+// Right slide-in
+gsap.utils.toArray('.gs-reveal-right').forEach(el => {
+  gsap.to(el, {
+    opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+  });
+});
+
+// Scale-in (specs + work cards)
+gsap.utils.toArray('.gs-reveal-scale').forEach((el, i) => {
+  const parent = el.parentElement;
+  const siblings = parent ? Array.from(parent.children).filter(c => c.classList.contains('gs-reveal-scale')) : [];
+  const idx = siblings.indexOf(el);
+  gsap.to(el, {
+    opacity: 1, scale: 1, duration: 0.7, ease: 'power2.out',
+    delay: idx * 0.12,
+    scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+  });
+});
+
+// Hero parallax: glass box rises slightly on scroll
+gsap.to('.hero-content', {
+  y: -50, scale: 0.97, opacity: 0.4,
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
+});
+
+// Manifesto ticker speed boost on scroll
+gsap.to('.man-track', {
+  x: -200,
+  scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: 2 }
+});
+</script>
 
 <!-- ═══════════════════════════════ RED AI — ANTHROPIC API ═══════════════════════════════ -->
 <script>
